@@ -21,7 +21,7 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/api/form", name="api_form")
-     * @Method("POST")
+     *
      */
     public function indexAction(Request $request)
     {
