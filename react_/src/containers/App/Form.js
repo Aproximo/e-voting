@@ -82,6 +82,7 @@ class Form extends Component {
             id_code: this.state.id_code,
             passport_pass: this.state.passport_pass
         })
+
             // .then(function (response) {
             //     console.log(response);
             // })
@@ -90,6 +91,16 @@ class Form extends Component {
             //     // const {status, data} = error.response;
             //     // let text;
             // });
+
+            .then(function (response) {
+                console.log('response',response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                // const {status, data} = error.response;
+                // let text;
+            });
+
             // switch (status) {
             //     case 500:
             //         text = 'Внутренняя ошибка сервера. Обратитесь к администратору.';
