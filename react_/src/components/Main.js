@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import Main from '../containers/Main/Main';
-import Article from '../containers/Main/Articles';
+import Articles from '../containers/Main/Articles';
 
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     return (
         <div>
             <Main />
-            <Article />
+            {/*<Articles />*/}
         </div>
 
     )

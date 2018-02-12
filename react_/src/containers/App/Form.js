@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import '../../style/Form.css';
 import axios from 'axios'
+import humans from "../../json/humans";
 
 class Form extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +14,7 @@ class Form extends Component {
             surname: '',
             id_code: '',
             passport_pass: ''
-        }
+        };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSurnameChange = this.handleSurnameChange.bind(this);
         this.handlePassIdChange = this.handlePassIdChange.bind(this);
@@ -36,54 +38,44 @@ class Form extends Component {
 
     handleSurnameChange(e) {
         this.setState({
-            name: e.target.value
+            surname: e.target.value
         })
     }
 
     handleIdCodeChange(e) {
         this.setState({
-            name: e.target.value
+            id_code: e.target.value
         })
     }
 
     handlePassportPassChange(e) {
         this.setState({
-            name: e.target.value
+            passport_pass: e.target.value
         })
     }
 
     handleSubmit(e) {
        e.preventDefault();
-       console.log(this.state)
+        let total = humans.push(this.state);
+       console.log(humans)
+
 
         // axios.post('http://127.0.0.1:8000/api/form', {
-        //     firstName: 'Fred',
-        //     lastName: 'Flintstone'
+        //
         // })
         //     .then(function (response) {
         //         console.log(response);
         //     })
         //     .catch(function (error) {
-        //         console.log("error", error);
+        //         console.log(error);
         //     });
-
-
-        axios.post('http://127.0.0.1:8000/api/form', {
-            firstName: 'Fred',
-            lastName: 'Flintstone'
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
     }
 
 
 
     render() {
+        console.log(this.state);
         return (
             <form onSubmit={this.handleSubmit} className="form-field">
                 <div className="form">

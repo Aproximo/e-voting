@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import '../../style/Form.css';
 import axios from 'axios'
 
@@ -15,7 +15,7 @@ class Articles extends Component {
 
 
     componentWillMount() {
-        console.log("hi");
+        // console.log("hi");
         axios.get('http://127.0.0.1:8000/api/article')
             .then(({ data }) => {
                     this.setState({
@@ -42,7 +42,7 @@ class Articles extends Component {
                 </div>
             )
         });
-        console.log("toDo", $item);
+        // console.log("toDo", $item);
         this.setState({
             item: $item
         })
@@ -51,12 +51,12 @@ class Articles extends Component {
 
     render() {
         let item = this.state.item;
-        console.log("render", item);
+        // console.log("render", {item});
         return (
            <div>
 
                {item}
-               <span>Articles</span>
+               {/*<span>Articles</span>*/}
 
            </div>
         )
