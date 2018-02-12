@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
 class ProgrammerController extends Controller
@@ -42,7 +43,28 @@ class ProgrammerController extends Controller
 
         return new JsonResponse($array);
 
+    }
 
+
+
+
+    /**
+     * @Route("/api/humans", name="api_humans")
+     *
+     */
+    public function humansAction(Request $request)
+    {
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Headers: Content-Type, *');
+
+        $data = json_decode($request->getContent(), true);
+
+
+        if (!$data){
+            return new Response('Woops, i didn;t get data');
+        }
+
+        return new JsonResponse($data);
     }
 
 }
