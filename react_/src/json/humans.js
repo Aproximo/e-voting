@@ -1,20 +1,19 @@
 let humans = [
     {
-        id: 1,
-        email: 'a.myronow@gmail.com',
+        passport_id: 1345445,
+        passport_pass: 'xxx',
+        name: 'Sasha',
+        surname: 'Myronov',
+        id_code: 12345
 
-    },
-    {
-        id: 2,
-        email: 'e.kozub@ukr.net',
-    },
+    }
 
-    {
-        id: 3,
-        email: 'xsky@ukr.net',
-
-
-    },
 ]
 
 export default humans;
+
+// import humans from "../containers/App/Form"
+//
+// let all = humans;
+//
+// console.log(all);
