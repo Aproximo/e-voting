@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
 import '../../style/Form.css';
 import axios from 'axios'
-import humans from "../../json/humans";
+// import humans from "../../json/humans";
 
 class Form extends Component {
 
@@ -82,14 +82,14 @@ class Form extends Component {
             id_code: this.state.id_code,
             passport_pass: this.state.passport_pass
         })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-                // const {status, data} = error.response;
-                // let text;
-            });
+            // .then(function (response) {
+            //     console.log(response);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            //     // const {status, data} = error.response;
+            //     // let text;
+            // });
             // switch (status) {
             //     case 500:
             //         text = 'Внутренняя ошибка сервера. Обратитесь к администратору.';
