@@ -1,12 +1,12 @@
 let humans = [
-    {
-        passport_id: 1345445,
-        passport_pass: 'xxx',
-        name: 'Sasha',
-        surname: 'Myronov',
-        id_code: 12345
-
-    }
+    // {
+    //     passport_id: 123456789,
+    //     passport_pass: 7531,
+    //     name: 'John',
+    //     surname: 'Doe',
+    //     id_code: 1597532580
+    //
+    // }
 
 ]
 

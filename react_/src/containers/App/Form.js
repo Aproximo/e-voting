@@ -56,19 +56,52 @@ class Form extends Component {
 
     handleSubmit(e) {
        e.preventDefault();
-        let total = humans.push(this.state);
-       console.log(humans)
-
-
-        // axios.post('http://127.0.0.1:8000/api/form', {
-        //
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
+        // axios({
+        //     method: 'post',
+        //     url: 'http://127.0.0.1:8000/api/humans',
+        //     data: {
+        //         passport_id: this.state.passport_id,
+        //         name: this.state.name,
+        //         surname: this.state.surname,
+        //         id_code: this.state.id_code,
+        //         passport_pass: this.state.passport_pass
         //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+        //         .then(function (response) {
+        //           console.log(response);
+        //         })
+        //          .catch(function (error) {
+        //             console.log(error);
+        //          })
+
+
+
+        axios.post('http://127.0.0.1:8000/api/humans', {
+            passport_id: this.state.passport_id,
+            name: this.state.name,
+            surname: this.state.surname,
+            id_code: this.state.id_code,
+            passport_pass: this.state.passport_pass
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+                // const {status, data} = error.response;
+                // let text;
+            });
+            // switch (status) {
+            //     case 500:
+            //         text = 'Внутренняя ошибка сервера. Обратитесь к администратору.';
+            //         break;
+            //     case 401:
+            //         text = 'Ошибка авторизации. Пожалуйста войдите в систему.';
+            //         break;
+            //     default:
+            //         text = data.error_description || data.message;
+            //         break;
+            // }
+
 
     }
 
