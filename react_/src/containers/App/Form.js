@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
 import '../../style/Form.css';
 import axios from 'axios'
-import humans from "../../json/humans";
+// import humans from "../../json/humans";
+import Login from "../../containers/App/Login";
+let ok = "";
 
-class Form extends Component {
+    class Form extends Component {
 
     constructor(props) {
         super(props);
@@ -82,14 +84,31 @@ class Form extends Component {
             id_code: this.state.id_code,
             passport_pass: this.state.passport_pass
         })
+
+            // .then(function (response) {
+            //     console.log(response);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            //     // const {status, data} = error.response;
+            //     // let text;
+            // });
+
             .then(function (response) {
+                if(response.status == 200) {
+                 ok = 200;
+                 console.log(ok);
+                }
                 console.log('response',response);
             })
+
+
             .catch(function (error) {
                 console.log(error);
                 // const {status, data} = error.response;
                 // let text;
             });
+
             // switch (status) {
             //     case 500:
             //         text = 'Внутренняя ошибка сервера. Обратитесь к администратору.';
@@ -108,8 +127,10 @@ class Form extends Component {
 
 
     render() {
+
         console.log(this.state);
-        return (
+        if (ok === 200){
+            return (
             <form onSubmit={this.handleSubmit} className="form-field">
                 <div className="form">
                     <label>
@@ -138,7 +159,12 @@ class Form extends Component {
                 </div>
             </form>
         )
-    }
+        }else{
+            return (
+                <Login/>
+            );
+    }}
+
 }
 
 export default Form;
