@@ -60,11 +60,119 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $passport_id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $passport_pass;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $surname;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_code;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organisations")
      * @JMS\Exclude
+     * @ORM\JoinColumn(name="organisation_id")
      */
     private $organisation;
+
+    /**
+     * @return mixed
+     */
+    public function getPassportId()
+    {
+        return $this->passport_id;
+    }
+
+    /**
+     * @param mixed $passport_id
+     */
+    public function setPassportId($passport_id)
+    {
+        $this->passport_id = $passport_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassportPass()
+    {
+        return $this->passport_pass;
+    }
+
+    /**
+     * @param mixed $passport_pass
+     */
+    public function setPassportPass($passport_pass)
+    {
+        $this->passport_pass = $passport_pass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @param mixed $surname
+     */
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdCode()
+    {
+        return $this->id_code;
+    }
+
+    /**
+     * @param mixed $id_code
+     */
+    public function setIdCode($id_code)
+    {
+        $this->id_code = $id_code;
+    }
+
+
 
    public function  __construct($roles = ["ROLE_USER"]){
         $this->roles = $roles;
