@@ -59,12 +59,20 @@ class ProgrammerController extends Controller
 
         $data = json_decode($request->getContent(), true);
 
+        $users = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->getByPassportId($data['passport_id']);
 
-        if (!$data){
-            return new Response('Woops, i didn;t get data');
+        if (!$users){
+            return new Response('User was not found',
+                401,
+                array('content-type' => 'text/html'));
         }
 
-        return new JsonResponse($data);
+        return new Response('Allowed',
+            200,
+            array('content-type' => 'text/html'));
     }
 
 }

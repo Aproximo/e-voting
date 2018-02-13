@@ -28,4 +28,17 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function getByPassportId($value){
+
+        $return = $this->getEntityManager()
+            ->createQuery(
+                "SELECT user FROM AppBundle:User user  WHERE user.passport_id = :value "
+            )
+            ->setParameter( 'value', "$value")
+            ->getResult();
+
+        return $return;
+
+    }
+
 }
