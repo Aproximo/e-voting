@@ -62,12 +62,16 @@ class AuthorizationController extends Controller
         $array = ['passport_id', 'passport_pin', 'itn', 'name', 'surname', 'date_of_birthday', 'valid_until'];
 
         $i = true;
-
-        foreach ($array as $value){
-            if (!array_key_exists ( $value , $data )){
-               $i = false;
+            if (is_array($data)){
+                foreach ($array as $value){
+                    if (!array_key_exists ( $value , $data )){
+                        $i = false;
+                    }
+                }
+            } else {
+                $i = false;
             }
-        }
+
         if (!$i){
             return new Response("Validation error", 400);
         }
