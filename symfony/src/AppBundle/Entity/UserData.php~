@@ -1,0 +1,73 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
+
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user_data")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserDataRepository")
+ *
+ */
+class UserData
+{
+    /**
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     */
+    private $id;
+
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $passport_id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $passport_pin;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $itn;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $surname;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_of_birthday;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $valid_until;
+
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="user_data")
+     * @ORM\JoinColumn(name="user_id",referencedColumnName="id")
+     */
+    private $user_id;
+
+
+}
