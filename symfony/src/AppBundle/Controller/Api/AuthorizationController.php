@@ -64,7 +64,7 @@ class AuthorizationController extends Controller
         $i = true;
 
         foreach ($array as $value){
-            if (!array_key_exists ( $value , $array )){
+            if (!array_key_exists ( $value , $data )){
                $i = false;
             }
         }
