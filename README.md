@@ -12,7 +12,7 @@ Back
  * /api/article
  * /api/article/{id}
 
-BD
+DB
 =
 
 
@@ -31,10 +31,10 @@ BD
     * password
 * user_data
     * user_id
-    * ITN
+    * itn
     * passport_id
     * passport_pin
     * name
     * surname
     * date_of_birthday
-    * Valid_until
+    * valid_until
