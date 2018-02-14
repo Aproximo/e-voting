@@ -15,12 +15,12 @@ class UserDataRepository extends \Doctrine\ORM\EntityRepository
 
         $return = $this->getEntityManager()
             ->createQuery(
-                "SELECT user_data FROM AppBundle:UserData user_data  WHERE user_data.passport_id = :passport_id, user_data.passport_pin = :passport_pin, user_data.itn= :itn, user_data.name = :name, user_data.surname = :surname, user_data.date_of_birthday = :date_of_birthday, user_data.valid_until = :valid_until"
+                "SELECT user_data FROM AppBundle:UserData user_data  WHERE user_data.passport_id = :passport_id AND user_data.passport_pin = :passport_pin AND user_data.itn= :itn AND user_data.name = :name_i AND user_data.surname = :surname AND user_data.date_of_birthday = :date_of_birthday AND user_data.valid_until = :valid_until"
             )
             ->setParameter( 'passport_id', $array['passport_id'])
             ->setParameter('passport_pin', $array['passport_pin'])
             ->setParameter('itn', $array['itn'])
-            ->setParameter('name', $array['name'])
+            ->setParameter('name_i', $array['name'])
             ->setParameter('surname', $array['surname'])
             ->setParameter('date_of_birthday', $array['date_of_birthday'])
             ->setParameter('valid_until', $array['valid_until'])

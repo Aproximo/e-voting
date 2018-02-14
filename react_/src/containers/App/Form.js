@@ -4,7 +4,7 @@ import '../../style/Form.css';
 import axios from 'axios'
 // import humans from "../../json/humans";
 // import Login from "../../containers/App/Login";
-import Applicants from "../../containers/App/Applicants";
+import Articles from "../../containers/Main/Articles";
 // let ok;
 
     class Form extends Component {
@@ -101,17 +101,19 @@ import Applicants from "../../containers/App/Applicants";
         //             console.log(error);
         //          })
 
-
-
-        axios.post('http://127.0.0.1:8000/api/humans', {
+        let array = {
             itn: this.state.itn,
             passport_id: this.state.passport_id,
             passport_pin: this.state.passport_pin,
             name: this.state.name,
             surname: this.state.surname,
-            date_of_birthday: this.date_of_birthday,
+            date_of_birthday: '2018-02-14',
             valid_until: this.state.valid_until,
-        })
+        };
+
+        array = JSON.stringify(array);
+
+        axios.post('http://127.0.0.1:8000/api/humans', array )
 
             // .then(function (response) {
             //     console.log(response);
@@ -122,7 +124,7 @@ import Applicants from "../../containers/App/Applicants";
             //     // let text;
             // });
 
-            .then(function (response) {
+            .then((response) => {
                 if(response.status === 200) {
                         this.handleChangeStatus() ;
                         // console.log(ok);
@@ -132,7 +134,7 @@ import Applicants from "../../containers/App/Applicants";
 
 
             .catch(function (error) {
-                console.log(error);
+                console.log("error", error);
                 // const {status, data} = error.response;
                 // let text;
             });
@@ -163,7 +165,7 @@ import Applicants from "../../containers/App/Applicants";
         if (this.state.status === 200){
                 console.log(this.state.status)
             return (
-                <Applicants/>
+                <Articles/>
             );
         }else{
             console.log(this.state.status)
@@ -202,13 +204,14 @@ import Applicants from "../../containers/App/Applicants";
 
                         <button>Save</button>
                         <div>
-                            * itn ‎9999999999
-                            * passport_id ‎123456789
-                            * passport_pin 1111
-                            * name Jon
-                            * surname Doe
-                            * date_of_birthday ‎2018-02-14
-                            * valid_until ‎2018-02-14
+                            <p>* itn ‎9999999999</p>
+                            <p>* passport_id ‎123456789</p>
+                            <p>* passport_pin 1111</p>
+                            <p>* name Jon</p>
+                            <p>* surname Doe</p>
+                            <p>* date_of_birthday ‎2018-02-14</p>
+                            <p>* valid_until ‎2018-02-14</p>
+
                         </div>
                     </div>
                 </form>
