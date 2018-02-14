@@ -4,7 +4,7 @@ import '../../style/Form.css';
 import axios from 'axios'
 // import humans from "../../json/humans";
 import Login from "../../containers/App/Login";
-let ok = "";
+let ok;
 
     class Form extends Component {
 
@@ -95,9 +95,9 @@ let ok = "";
             // });
 
             .then(function (response) {
-                if(response.status == 200) {
-                 ok = 200;
-                 console.log(ok);
+                if(response.status === 200) {
+                        ok = 200;
+                        console.log(ok);
                 }
                 console.log('response',response);
             })
@@ -129,35 +129,42 @@ let ok = "";
     render() {
 
         console.log(this.state);
-        if (ok === 200){
+        if (ok !== 200){
             return (
-            <form onSubmit={this.handleSubmit} className="form-field">
-                <div className="form">
-                    <label>
-                        <span>Password ID</span>
-                        <input type="text" value={this.state.passport_id} onChange={this.handlePassIdChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Name</span>
-                        <input type="text" value={this.state.name} onChange={this.handleNameChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Surname</span>
-                        <input type="text" value={this.state.surname} onChange={this.handleSurnameChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Identification code</span>
-                        <input type="text" value={this.state.id_code} onChange={this.handleIdCodeChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Passport password</span>
-                        <input type="text" value={this.state.passport_pass} onChange={this.handlePassportPassChange} className="form-field-input"/>
-                    </label>
+                <form onSubmit={this.handleSubmit} className="form-field">
+                    <div className="form">
+                        <label>
+                            <span>Password ID</span>
+                            <input type="text" value={this.state.passport_id} onChange={this.handlePassIdChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Name</span>
+                            <input type="text" value={this.state.name} onChange={this.handleNameChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Surname</span>
+                            <input type="text" value={this.state.surname} onChange={this.handleSurnameChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Identification code</span>
+                            <input type="text" value={this.state.id_code} onChange={this.handleIdCodeChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Passport password</span>
+                            <input type="text" value={this.state.passport_pass} onChange={this.handlePassportPassChange} className="form-field-input"/>
+                        </label>
 
-                    <button>Save</button>
+                        <button>Save</button>
+                        <div>
+                            passport_id: 123456789,
+                            passport_pass: 7531,
+                            name: 'John',
+                            surname: 'Doe',
+                            id_code: 1597532580
+                        </div>
+                    </div>
+                </form>
 
-                </div>
-            </form>
         )
         }else{
             return (

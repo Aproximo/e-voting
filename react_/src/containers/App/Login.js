@@ -6,7 +6,7 @@ class Login extends Component {
 
     render() {
         return (
-            alert("This is login mfucka")
+            <div>This is Lgin</div>
         );
     }
 }
