@@ -73,12 +73,13 @@ class AuthorizationController extends Controller
             }
 
         if (!$i){
-            zreturn new Response("Validation error", 400);
+                return new JsonResponse($data);
+//            return new Response("Validation error", 400);
         }
 
         $users = $this
             ->getDoctrine()
-            ->getRepository('AppBundle:User')
+            ->getRepository('AppBundle:UserData')
             ->Compare($data);
 
         if (!$users){

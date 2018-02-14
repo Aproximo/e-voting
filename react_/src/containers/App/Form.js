@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import '../../style/Form.css';
 import axios from 'axios'
 // import humans from "../../json/humans";
-import Login from "../../containers/App/Login";
-import Applicants from "../../containers/App/Applicants";
+// import Login from "../../containers/App/Login";
+import Articles from "../../containers/Main/Articles";
 // let ok;
 
     class Form extends Component {
@@ -15,15 +15,19 @@ import Applicants from "../../containers/App/Applicants";
             passport_id: '',
             name: '',
             surname: '',
-            id_code: '',
-            passport_pass: '',
+            itn: '',
+            passport_pin: '',
+            date_of_birthday: '',
+            valid_until: '',
             status: ''
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSurnameChange = this.handleSurnameChange.bind(this);
         this.handlePassIdChange = this.handlePassIdChange.bind(this);
-        this.handlePassportPassChange = this.handlePassportPassChange.bind(this);
-        this.handleIdCodeChange = this.handleIdCodeChange.bind(this);
+        this.handlePassportPinChange = this.handlePassportPinChange.bind(this);
+        this.handleITNChange = this.handleITNChange.bind(this);
+        this.handlePassportDateChange = this.handlePassportDateChange.bind(this);
+        this.handleValidChange = this.handleValidChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
 
@@ -48,15 +52,27 @@ import Applicants from "../../containers/App/Applicants";
         })
     }
 
-    handleIdCodeChange(e) {
+    handleITNChange(e) {
         this.setState({
-            id_code: e.target.value
+            itn: e.target.value
         })
     }
 
-    handlePassportPassChange(e) {
+    handlePassportPinChange(e) {
         this.setState({
-            passport_pass: e.target.value
+            passport_pin: e.target.value
+        })
+    }
+
+    handlePassportDateChange(e) {
+        this.setState({
+            date_of_birthday: e.target.value
+        })
+    }
+
+    handleValidChange(e) {
+        this.setState({
+            valid_until: e.target.value
         })
     }
 
@@ -85,15 +101,19 @@ import Applicants from "../../containers/App/Applicants";
         //             console.log(error);
         //          })
 
-
-
-        axios.post('http://127.0.0.1:8000/api/humans', {
+        let array = {
+            itn: this.state.itn,
             passport_id: this.state.passport_id,
+            passport_pin: this.state.passport_pin,
             name: this.state.name,
             surname: this.state.surname,
-            id_code: this.state.id_code,
-            passport_pass: this.state.passport_pass
-        })
+            date_of_birthday: '2018-02-14',
+            valid_until: this.state.valid_until,
+        };
+
+        array = JSON.stringify(array);
+
+        axios.post('http://127.0.0.1:8000/api/humans', array )
 
             // .then(function (response) {
             //     console.log(response);
@@ -104,7 +124,7 @@ import Applicants from "../../containers/App/Applicants";
             //     // let text;
             // });
 
-            .then(function (response) {
+            .then((response) => {
                 if(response.status === 200) {
                         this.handleChangeStatus() ;
                         // console.log(ok);
@@ -114,7 +134,7 @@ import Applicants from "../../containers/App/Applicants";
 
 
             .catch(function (error) {
-                console.log(error);
+                console.log("error", error);
                 // const {status, data} = error.response;
                 // let text;
             });
@@ -140,12 +160,29 @@ import Applicants from "../../containers/App/Applicants";
 
         console.log(this.state);
 
+
+
+        if (this.state.status === 200){
+                console.log(this.state.status)
+            return (
+                <Articles/>
+            );
+        }else{
+            console.log(this.state.status)
             return (
                 <form onSubmit={this.handleSubmit} className="form-field">
                     <div className="form">
                         <label>
-                            <span>Password ID</span>
+                            <span>ITN</span>
+                            <input type="text" value={this.state.itn} onChange={this.handleITNChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Passport ID</span>
                             <input type="text" value={this.state.passport_id} onChange={this.handlePassIdChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Passport pin</span>
+                            <input type="text" value={this.state.passport_pin} onChange={this.handlePassportPinChange} className="form-field-input"/>
                         </label>
                         <label>
                             <span>Name</span>
@@ -156,35 +193,28 @@ import Applicants from "../../containers/App/Applicants";
                             <input type="text" value={this.state.surname} onChange={this.handleSurnameChange} className="form-field-input"/>
                         </label>
                         <label>
-                            <span>Identification code</span>
-                            <input type="text" value={this.state.id_code} onChange={this.handleIdCodeChange} className="form-field-input"/>
+                            <span>Date of birth</span>
+                            <input type="text" value={this.state.date_of_birthday} onChange={this.handlePassportDateChange} className="form-field-input"/>
                         </label>
                         <label>
-                            <span>Passport password</span>
-                            <input type="text" value={this.state.passport_pass} onChange={this.handlePassportPassChange} className="form-field-input"/>
+                            <span>Valid until</span>
+                            <input type="text" value={this.state.valid_until} onChange={this.handleValidChange} className="form-field-input"/>
                         </label>
+
 
                         <button>Save</button>
                         <div>
-                            zzpassport_id: 123456789,
-                            passport_pass: 7531,
-                            name: 'John',
-                            surname: 'Doe',
-                            id_code: 1597532580
+                            <p>* itn ‎9999999999</p>
+                            <p>* passport_id ‎123456789</p>
+                            <p>* passport_pin 1111</p>
+                            <p>* name Jon</p>
+                            <p>* surname Doe</p>
+                            <p>* date_of_birthday ‎2018-02-14</p>
+                            <p>* valid_until ‎2018-02-14</p>
+
                         </div>
                     </div>
                 </form>
-            )
-
-        if (this.state.status == 200){
-                console.log(this.state.status)
-            return (
-                <Applicants/>
-            );
-        }else{
-            console.log(this.state.status)
-            return (
-                <Login/>
             );
     }}
 
