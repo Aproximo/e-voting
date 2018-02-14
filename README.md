@@ -30,6 +30,7 @@ DB
     * roles
     * password
 * user_data
+    * id
     * user_id
     * itn
     * passport_id

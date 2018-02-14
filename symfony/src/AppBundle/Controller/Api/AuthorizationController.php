@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
-class ProgrammerController extends Controller
+class AuthorizationController extends Controller
 {
     /**
      * @Route("/api/users", name="api")
@@ -59,10 +59,23 @@ class ProgrammerController extends Controller
 
         $data = json_decode($request->getContent(), true);
 
+        $array = ['passport_id', 'passport_pin', 'itn', 'name', 'surname', 'date_of_birthday', 'valid_until'];
+
+        $i = true;
+
+        foreach ($array as $value){
+            if (!array_key_exists ( $value , $array )){
+               $i = false;
+            }
+        }
+        if (!$i){
+            return new Response("Validation error", 400);
+        }
+
         $users = $this
             ->getDoctrine()
             ->getRepository('AppBundle:User')
-            ->getByPassportId($data['passport_id']);
+            ->Compare($data);
 
         if (!$users){
             return new Response('User was not found',

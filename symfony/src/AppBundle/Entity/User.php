@@ -60,121 +60,14 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $passport_id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $passport_pass;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $surname;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_code;
-
-    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="$user_id")
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organisations")
-     * @JMS\Exclude
-     * @ORM\JoinColumn(name="organisation_id")
      */
-    private $organisation;
-
-    /**
-     * @return mixed
-     */
-    public function getPassportId()
-    {
-        return $this->passport_id;
-    }
-
-    /**
-     * @param mixed $passport_id
-     */
-    public function setPassportId($passport_id)
-    {
-        $this->passport_id = $passport_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassportPass()
-    {
-        return $this->passport_pass;
-    }
-
-    /**
-     * @param mixed $passport_pass
-     */
-    public function setPassportPass($passport_pass)
-    {
-        $this->passport_pass = $passport_pass;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    /**
-     * @param mixed $surname
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdCode()
-    {
-        return $this->id_code;
-    }
-
-    /**
-     * @param mixed $id_code
-     */
-    public function setIdCode($id_code)
-    {
-        $this->id_code = $id_code;
-    }
+    private $user_data;
 
 
 
-   public function  __construct($roles = ["ROLE_USER"]){
+   public function  __construct($roles = ["ROLE_USER_NOT_AUTHORIZED"]){
         $this->roles = $roles;
 
 
@@ -319,28 +212,28 @@ class User implements UserInterface
         return $this;
     }
 
+
     /**
-     * Set organisation
+     * Set userData
      *
-     * @param \AppBundle\Entity\Organisations $organisation
+     * @param \AppBundle\Entity\UserData $userData
      *
      * @return User
      */
-    public function setOrganisation(\AppBundle\Entity\Organisations $organisation = null)
+    public function setUserData(\AppBundle\Entity\UserData $userData = null)
     {
-        $this->organisation = $organisation;
+        $this->user_data = $userData;
 
         return $this;
     }
 
     /**
-     * Get organisation
+     * Get userData
      *
-     * @return \AppBundle\Entity\Organisations
-     *
+     * @return \AppBundle\Entity\UserData
      */
-    public function getOrganisation()
+    public function getUserData()
     {
-        return $this->organisation;
+        return $this->user_data;
     }
 }
