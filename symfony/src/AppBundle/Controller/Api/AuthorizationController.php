@@ -73,7 +73,7 @@ class AuthorizationController extends Controller
             }
 
         if (!$i){
-            return new Response("Validation error", 400);
+            zreturn new Response("Validation error", 400);
         }
 
         $users = $this
