@@ -56,7 +56,7 @@ class Articles extends Component {
            <div>
 
                {item}
-               {/*<span>Articles</span>*/}
+               <span>Articles</span>
 
            </div>
         )

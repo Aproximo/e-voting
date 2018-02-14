@@ -4,7 +4,8 @@ import '../../style/Form.css';
 import axios from 'axios'
 // import humans from "../../json/humans";
 import Login from "../../containers/App/Login";
-let ok = "";
+import Applicants from "../../containers/App/Applicants";
+// let ok;
 
     class Form extends Component {
 
@@ -15,7 +16,8 @@ let ok = "";
             name: '',
             surname: '',
             id_code: '',
-            passport_pass: ''
+            passport_pass: '',
+            status: ''
         };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleSurnameChange = this.handleSurnameChange.bind(this);
@@ -23,6 +25,8 @@ let ok = "";
         this.handlePassportPassChange = this.handlePassportPassChange.bind(this);
         this.handleIdCodeChange = this.handleIdCodeChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChangeStatus = this.handleChangeStatus.bind(this);
+
 
     }
 
@@ -55,6 +59,12 @@ let ok = "";
             passport_pass: e.target.value
         })
     }
+
+    handleChangeStatus(e) {
+            this.setState({
+                status: 200
+            })
+        }
 
     handleSubmit(e) {
        e.preventDefault();
@@ -95,9 +105,9 @@ let ok = "";
             // });
 
             .then(function (response) {
-                if(response.status == 200) {
-                 ok = 200;
-                 console.log(ok);
+                if(response.status === 200) {
+                        this.handleChangeStatus() ;
+                        // console.log(ok);
                 }
                 console.log('response',response);
             })
@@ -129,37 +139,50 @@ let ok = "";
     render() {
 
         console.log(this.state);
-        if (ok === 200){
+
             return (
-            <form onSubmit={this.handleSubmit} className="form-field">
-                <div className="form">
-                    <label>
-                        <span>Password ID</span>
-                        <input type="text" value={this.state.passport_id} onChange={this.handlePassIdChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Name</span>
-                        <input type="text" value={this.state.name} onChange={this.handleNameChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Surname</span>
-                        <input type="text" value={this.state.surname} onChange={this.handleSurnameChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Identification code</span>
-                        <input type="text" value={this.state.id_code} onChange={this.handleIdCodeChange} className="form-field-input"/>
-                    </label>
-                    <label>
-                        <span>Passport password</span>
-                        <input type="text" value={this.state.passport_pass} onChange={this.handlePassportPassChange} className="form-field-input"/>
-                    </label>
+                <form onSubmit={this.handleSubmit} className="form-field">
+                    <div className="form">
+                        <label>
+                            <span>Password ID</span>
+                            <input type="text" value={this.state.passport_id} onChange={this.handlePassIdChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Name</span>
+                            <input type="text" value={this.state.name} onChange={this.handleNameChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Surname</span>
+                            <input type="text" value={this.state.surname} onChange={this.handleSurnameChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Identification code</span>
+                            <input type="text" value={this.state.id_code} onChange={this.handleIdCodeChange} className="form-field-input"/>
+                        </label>
+                        <label>
+                            <span>Passport password</span>
+                            <input type="text" value={this.state.passport_pass} onChange={this.handlePassportPassChange} className="form-field-input"/>
+                        </label>
 
-                    <button>Save</button>
+                        <button>Save</button>
+                        <div>
+                            passport_id: 123456789,
+                            passport_pass: 7531,
+                            name: 'John',
+                            surname: 'Doe',
+                            id_code: 1597532580
+                        </div>
+                    </div>
+                </form>
+            )
 
-                </div>
-            </form>
-        )
+        if (this.state.status == 200){
+                console.log(this.state.status)
+            return (
+                <Applicants/>
+            );
         }else{
+            console.log(this.state.status)
             return (
                 <Login/>
             );
