@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import '../../style/Form.css';
 import axios from 'axios'
 // import humans from "../../json/humans";
-import Login from "../../containers/App/Login";
+// import Login from "../../containers/App/Login";
 import Applicants from "../../containers/App/Applicants";
 // let ok;
 
@@ -158,6 +158,15 @@ import Applicants from "../../containers/App/Applicants";
 
         console.log(this.state);
 
+
+
+        if (this.state.status === 200){
+                console.log(this.state.status)
+            return (
+                <Applicants/>
+            );
+        }else{
+            console.log(this.state.status)
             return (
                 <form onSubmit={this.handleSubmit} className="form-field">
                     <div className="form">
@@ -203,17 +212,6 @@ import Applicants from "../../containers/App/Applicants";
                         </div>
                     </div>
                 </form>
-            )
-
-        if (this.state.status == 200){
-                console.log(this.state.status)
-            return (
-                <Applicants/>
-            );
-        }else{
-            console.log(this.state.status)
-            return (
-                <Login/>
             );
     }}
 
