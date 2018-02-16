@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './style/index.css';
 import {BrowserRouter, Route} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-import App from "./components/App";
-import Form from "./containers/App/Form";
-import Articles from "./containers/Main/Articles";
+import App from "./App";
+import Form from "./containers/Form";
+import Articles from "./containers/Articles";
 // import Login from "./containers/App/Login";
 
 ReactDOM.render((

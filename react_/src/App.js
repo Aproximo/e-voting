@@ -5,7 +5,9 @@ import React, {Component} from 'react';
 // import Form from '../containers/App/Form';
 // import Articles from "../containers/Main/Articles";
 // import {BrowserRouter, Route} from 'react-router-dom';
-import Main from "../containers/Main/Main";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+import Aside from "./components/Aside";
 
 class App extends Component {
   render (
@@ -14,9 +16,8 @@ class App extends Component {
     return (
         <div>
             <Main/>
-            {/*<Articles/>*/}
-            {/*<Form/>*/}
-            {/*<Check items={humans}/>*/}
+            <Aside/>
+            <Footer/>
         </div>
 
     )
