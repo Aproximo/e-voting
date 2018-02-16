@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
-import '../../style/Form.css';
+import '../style/containers/Form.css';
 import axios from 'axios'
 // import humans from "../../json/humans";
 // import Login from "../../containers/App/Login";
-import Articles from "../../containers/Main/Articles";
+import Articles from "./Articles";
 // let ok;
 
     class Form extends Component {
@@ -84,23 +84,6 @@ import Articles from "../../containers/Main/Articles";
 
     handleSubmit(e) {
        e.preventDefault();
-        // axios({
-        //     method: 'post',
-        //     url: 'http://127.0.0.1:8000/api/humans',
-        //     data: {
-        //         passport_id: this.state.passport_id,
-        //         name: this.state.name,
-        //         surname: this.state.surname,
-        //         id_code: this.state.id_code,
-        //         passport_pass: this.state.passport_pass
-        //     })
-        //         .then(function (response) {
-        //           console.log(response);
-        //         })
-        //          .catch(function (error) {
-        //             console.log(error);
-        //          })
-
         let array = {
             itn: this.state.itn,
             passport_id: this.state.passport_id,
@@ -115,15 +98,6 @@ import Articles from "../../containers/Main/Articles";
 
         axios.post('http://127.0.0.1:8000/api/humans', array )
 
-            // .then(function (response) {
-            //     console.log(response);
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            //     // const {status, data} = error.response;
-            //     // let text;
-            // });
-
             .then((response) => {
                 if(response.status === 200) {
                         this.handleChangeStatus() ;
@@ -135,21 +109,8 @@ import Articles from "../../containers/Main/Articles";
 
             .catch(function (error) {
                 console.log("error", error);
-                // const {status, data} = error.response;
-                // let text;
             });
 
-            // switch (status) {
-            //     case 500:
-            //         text = 'Внутренняя ошибка сервера. Обратитесь к администратору.';
-            //         break;
-            //     case 401:
-            //         text = 'Ошибка авторизации. Пожалуйста войдите в систему.';
-            //         break;
-            //     default:
-            //         text = data.error_description || data.message;
-            //         break;
-            // }
 
 
     }

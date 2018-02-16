@@ -1,6 +1,6 @@
 .main-header {
-    width: 100vw;
-    height: 10vh;
+    /*width: 100vw;*/
+    height: 7vh;
     background-color: slategray;
     color: cornsilk;
     padding: 1% 0 0 10%;
@@ -14,10 +14,10 @@
 }
 
 .main-nav {
-    width: 100vw;
+    /*width: 100vw;*/
     height: 10vh;
     color: slategray;
-    padding: 2% 5% 2% 5%;
+    padding: 1% 5% 1% 5%;
 }
 
 .main-nav-order {
@@ -38,17 +38,6 @@ ul, li:hover, a:hover {
     color: orange;
 }
 
-
-
-
-
-
-
-/*a {*/
-    /*text-decoration: none;*/
-    /*color: slategray;*/
-    /*font-size: 20px;*/
-/*}*/
 
 
 

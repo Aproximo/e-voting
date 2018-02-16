@@ -1,0 +1,8 @@
+.aside {
+    text-align: right;
+    /*width: 200px;*/
+}
+
+.aside-advertising-img {
+    border: 2px solid darkslategray;
+}
