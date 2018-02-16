@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import '../style/Main.css';
+import '../style/components/Main.css';
 
 class Main extends Component {
     constructor(props) {

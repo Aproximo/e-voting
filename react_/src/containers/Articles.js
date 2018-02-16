@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
-import '../style/Form.css';
+import '../style/containers/Form.css';
 import axios from 'axios'
 
 class Articles extends Component {

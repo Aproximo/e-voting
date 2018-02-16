@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import '../style/Aside.css';
+import '../style/components/Aside.css';
 
 class Aside extends Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class Aside extends Component {
 
         }
 
-    }lpo;
+    }
 
 
     render() {
