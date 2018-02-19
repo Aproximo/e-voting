@@ -4,7 +4,6 @@ import Main from "./Main";
 import Footer from "./Footer";
 import Aside from "./Aside";
 
-
 const App = () => (
     <div>
         <Header/>

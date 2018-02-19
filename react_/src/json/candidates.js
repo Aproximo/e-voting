@@ -1,6 +1,8 @@
-const applicants = [
+const candidates = [
     {
         id: 1,
+        number: 1,
+        path: `candidates/1`,
         name: 'Юлия Тимошенко',
         consigment: 'Блок Юлии Тимошенко',
         photo: 'http://vibori.in.ua/images/stories/candidate/timoshenko.jpg',
@@ -110,6 +112,8 @@ const applicants = [
     },
     {
         id: 2,
+        number: 2,
+        path: `candidates/2`,
         name: 'Петр Порошенко',
         consigment: 'Солидарность',
         photo: 'http://vibori.in.ua/cache/multithumb_thumbs/b_200_136_16777215_00_images_stories_candidate_poroshenko.jpg',
@@ -165,6 +169,8 @@ const applicants = [
     },
     {
         id: 3,
+        number: 3,
+        path: `candidates/3`,
         name: 'Олег Ляшко',
         consigment: 'Радикальная партия Олега Ляшка',
         photo: 'http://vibori.in.ua/cache/multithumb_thumbs/b_200_124_16777215_00_images_stories_candidate_ljashko.jpg',
@@ -256,4 +262,4 @@ const applicants = [
     }
 ];
 
-export default applicants;
+export default candidates;
