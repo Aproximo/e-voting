@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-// import {Link} from 'react-router-dom';
-import '../style/containers/Form.css';
+import '../../style/containers/Form.css';
 import axios from 'axios'
-// import humans from "../../json/humans";
-// import Login from "../../containers/App/Login";
-import Articles from "./Articles";
-// let ok;
+import Articles from "../Articles/Articles";
+
 
     class Form extends Component {
 

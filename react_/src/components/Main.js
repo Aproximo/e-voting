@@ -1,34 +1,21 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import '../style/components/Main.css';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import Form from '../containers/Form/Form'
+import Articles from '../containers/Articles/Articles'
+import Registration from '../containers/Login/Registration'
+import Home from '../components/Home'
+import Routes from "../containers/Candidates/Routes";
 
-class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+const Main = () => (
+    <main>
+        <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/form' component={Form}/>
+            <Route path='/registration' component={Registration}/>
+            <Route path='/articles' component={Articles}/>
+            <Route path='/candidates' component={Routes}/>
+        </Switch>
+    </main>
+);
 
-        }
-
-    }
-
-
-    render() {
-        return (
-            <div>
-                <header className="main-header">
-                    <Link to="/"><li className="main-header-icon">UEV</li></Link>
-                </header>
-                <nav className="main-nav">
-                    <ul>
-                        <Link to="/" >Home</Link>
-                        <Link to="/registration"><li className="main-nav-order">Регистрация</li></Link>
-                        <Link to="/articles"><li className="main-nav-order">Новости</li></Link>
-                        <Link to="/form"><li className="main-nav-order">Личный кабинет</li></Link>
-                    </ul>
-                </nav>
-            </div>
-        )
-    }
-}
-
-export default Main;
+export default Main
