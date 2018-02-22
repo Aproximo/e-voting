@@ -37,8 +37,8 @@ class Articles extends Component {
         let $item = this.state.article.map((item, key) => {
             return (
                 <div id={key}>
-                    <h2>{item.title}</h2>
-                    <span>{item.content}</span>
+                    <h2 >{item.title}</h2>
+                    <span >{item.content}</span>
                 </div>
             )
         });
@@ -54,10 +54,8 @@ class Articles extends Component {
         // console.log("render", {item});
         return (
            <div>
-
                {item}
                <span>Articles</span>
-
            </div>
         )
     }
