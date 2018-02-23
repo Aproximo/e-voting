@@ -57,7 +57,7 @@ class AuthorizationController extends Controller
 
 
     /**
-     * @Route("/api/humans", name="api_humans")
+     * @Route("/api/form_authentication", name="api_humans")
      *
      */
     public function humansAction(Request $request)
@@ -80,8 +80,8 @@ class AuthorizationController extends Controller
             }
 
         if (!$i){
-                return new JsonResponse($data);
-//            return new Response("Validation error", 400);
+
+            return new Response("Validation error", 400);
         }
 
         $users = $this
@@ -144,7 +144,7 @@ class AuthorizationController extends Controller
         $data = json_decode($request->getContent(), true);
 
         if (!$data['email'] && !$data['password']){
-            return new Response("",400, "Bad Request");
+            return new Response("",400);
         }
 
         $user = $this
@@ -153,7 +153,7 @@ class AuthorizationController extends Controller
             ->getByEmail($data['email']);
 
         if (!$user) {
-            return new Response("",404, "Not Found");
+            return new Response("",404);
         }
 
 
@@ -165,7 +165,7 @@ class AuthorizationController extends Controller
             return JsonResponse::create($user['roles'], 200);
         }
 
-        return new Response("User was created",400, "Bad Request");
+        return new Response("",400);
 
     }
 
