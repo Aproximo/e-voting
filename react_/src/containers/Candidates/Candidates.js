@@ -8,7 +8,7 @@ const Candidates = ({children}) => {
             <div>Sorry now we have problems with this page</div>
         )
     } else {
-        // console.log(candidates);
+        console.log(candidates);
         return (
 
             <div>
@@ -16,7 +16,7 @@ const Candidates = ({children}) => {
                     <ul>
                         {candidates.map((tab) =>
                             <li key={tab.id}>
-                                <Link to={`/candidates/${tab.id}`}>{tab.name}</Link>
+                                <Link to={`/presidential-elections/${tab.id}`}>{tab.name}</Link>
                             </li>
                         )}
                     </ul>

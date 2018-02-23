@@ -1,6 +1,7 @@
 .aside {
    display: inline-block;
     width: 15%;
+    text-align: right;
 }
 
 .aside-advertising-img {

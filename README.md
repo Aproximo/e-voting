@@ -1,12 +1,5 @@
 ## TODO
 
-![Image alt](https://github.com/{username}/{repository}/raw/{branch}/{path}/image.png)
-
-{username} — ваш ник на ГитХабе;
-{repository} — репозиторий где хранятся картинки;
-{branch} — ветка репозитория;
-{path} — путь к месту нахождения картинки.
-
 ![Image alt](https://github.com/Aproximo/e-voting/raw/myronov/pages/pages.jpg)
 
 
@@ -63,11 +56,11 @@ DB
     * date_of_birthday
     * valid_until
 * candidates
-    id: 1,
-    number: 1,
-    path: `candidates/1`,
-    name: 'Юлия Тимошенко',
-    consigment: 'Блок Юлии Тимошенко',
-    photo: 'http://vibori.in.ua/images/stories/candidate/timoshenko.jpg',
+    id: 
+    number: 
+    path: 
+    name: 
+    consigment: 
+    photo:
     electioneering:    
     

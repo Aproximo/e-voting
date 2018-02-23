@@ -1,9 +1,50 @@
 import React, {Component} from 'react';
+import {
+    Route,
+    Redirect,
+    withRouter
+} from "react-router-dom";
 import {FormErrors} from './FormErrors';
 import axios from "axios/index";
 
-class Registration extends Component {
 
+export const AuthButton = withRouter(
+    ({ history }) =>
+        this.isAuthenticated ? (
+            <p>
+                Welcome!{" "}
+                <button
+                    onClick={() => {
+                        this.signOut(() => history.push("/"));
+                    }}
+                >
+                    Sign out
+                </button>
+            </p>
+        ) : (
+            <p>You are not logged in.</p>
+        )
+);
+
+export const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            this.isAuthenticated ? (
+                <Component {...props} />
+            ) : (
+                <Redirect
+                    to={{
+                        pathname: "/registration",
+                        state: { from: props.location }
+                    }}
+                />
+            )
+        }
+    />
+);
+
+class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,8 +53,12 @@ class Registration extends Component {
             formErrors: {email: '', password: ''},
             emailValid: false,
             passwordValid: false,
-            formValid: false
+            formValid: false,
+            isAuthenticated: false,
+            redirectToReferrer: false
         };
+
+
 
     this.handleSubmitRegistration = this.handleSubmitRegistration.bind(this);
     this.handleChangeRegistrationStatus = this.handleChangeRegistrationStatus.bind(this);
@@ -21,9 +66,19 @@ class Registration extends Component {
     this.validateField = this.validateField.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.errorClass = this.errorClass.bind(this);
+    this.authenticate = this.authenticate.bind(this);
+    this.signOut = this.signOut.bind(this);
     }
 
 
+
+    authenticate = (e) => {
+        this.setState({isAuthenticated: true, redirectToReferrer: true});
+    };
+
+    signOut = (e) => {
+        this.setState({isAuthenticated: false});
+    };
 
     handleUserInput = (e) => {
         const name = e.target.name;
@@ -77,43 +132,49 @@ class Registration extends Component {
             password: this.state.password,
         };
 
-        const email = this.state.email;
-        const pass = this.state.password;
 
-        window.localStorage.setItem('email', this.state.email);
-        window.localStorage.setItem('pass',  this.state.password);
+//         const email = this.state.email;
+//         const pass = this.state.password;
 
-        if (email === 'a.myronow@gmail.com' && pass === '15975328') {//Узнать как хранить в локалсторадже неизмененные данные
-            console.log('ok');
-            console.log( this.context.router);
-            console.log( this.props);
-            this.context.history.push('/admin')
-        } else {
-            console.log('no');
-            console.log( this.props);
-            // this.context.history.push('/')
-        }
+//         window.localStorage.setItem('email', this.state.email);
+//         window.localStorage.setItem('pass',  this.state.password);
+
+//         if (email === 'a.myronow@gmail.com' && pass === '15975328') {//Узнать как хранить в локалсторадже неизмененные данные
+//             console.log('ok');
+//             console.log( this.context.router);
+//             console.log( this.props);
+//             this.context.history.push('/admin')
+//         } else {
+//             console.log('no');
+//             console.log( this.props);
+//             // this.context.history.push('/')
+//         }
+
+        this.authenticate();
+
 
         registration_array = JSON.stringify(registration_array);
-
         axios.post('http://127.0.0.1:8000/api/registration', registration_array )
 
-            .then((response) => {
-                if(response.status === 201) {
-                    this.handleChangeRegistrationStatus() ;
-                }
-                console.log('response',response);
-            })
-
-            .catch(function (error) {
-                console.log("error", error);
-            });
-
+        .then((response) => {
+            if(response.status === 201) {
+                this.handleChangeRegistrationStatus() ;
+            }
+            console.log('response',response);
+        })
+        .catch(function (error) {
+            console.log("error", error);
+        });
     }
 
-
     render() {
-        console.log(window.localStorage);
+        console.log(this.state.isAuthenticated, this.props.location.state );
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+
+        if (this.redirectToReferrer) {
+            return <Redirect to={from} />;
+        }
+
         return (
             <form onSubmit={this.handleSubmitRegistration} className="RegistrationForm">
                 <h2>Sign up</h2>
@@ -135,11 +196,10 @@ class Registration extends Component {
                            onChange={this.handleUserInput}  />
                 </div>
                 <button type="submit" disabled={!this.state.formValid}>Sign up</button>
+                <AuthButton/>
             </form>
-
         )
     }
-
 }
 
 export default Registration;
