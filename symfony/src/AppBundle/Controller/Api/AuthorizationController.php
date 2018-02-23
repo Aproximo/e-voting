@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Entity\User;
 
 
 class AuthorizationController extends Controller
@@ -108,13 +109,15 @@ class AuthorizationController extends Controller
 
         if (!$data['email'] && !$data['password']){
             return new Response("",400, "Bad Request");
+//            return "Hello world";
+            return new Response("",405, "Method Not Allowed");
         }
 
         $users = $this
             ->getDoctrine()
             ->getRepository('AppBundle:User')
             ->getByEmail($data['email']);
-
+        return new JsonResponse($data);
         if ($users) {
             return new Response("",405, "Method Not Allowed");
         }
@@ -134,37 +137,37 @@ class AuthorizationController extends Controller
 
     }
 
-    /**
-     * @Route ("/api/login", name="api_login")
-     */
-    public function loginAction (Request $request, ObjectManager $manager){
-        $data = json_decode($request->getContent(), true);
-
-        if (!$data['email'] && !$data['password']){
-            return new Response("",400, "Bad Request");
-        }
-
-        $user = $this
-            ->getDoctrine()
-            ->getRepository('AppBundle:User')
-            ->getByEmail($data['email']);
-
-        if (!$user) {
-            return new Response("",404, "Not Found");
-        }
-
-
-        $encoder = $this->container->get('security.password_encoder');
-        $passwordEncoded = $encoder->encodePassword($user, $data['password']);
-
-        if ($passwordEncoded == $user['password']){
-
-            return JsonResponse::create($user['roles'], 200);
-        }
-
-        return new Response("User was created",400, "Bad Request");
-
-    }
+//    /**
+//     * @Route ("/api/login", name="api_login")
+//     */
+//    public function loginAction (Request $request, ObjectManager $manager){
+//        $data = json_decode($request->getContent(), true);
+//
+//        if (!$data['email'] && !$data['password']){
+//            return new Response("",400, "Bad Request");
+//        }
+//
+//        $user = $this
+//            ->getDoctrine()
+//            ->getRepository('AppBundle:User')
+//            ->getByEmail($data['email']);
+//
+//        if (!$user) {
+//            return new Response("",404, "Not Found");
+//        }
+//
+//
+//        $encoder = $this->container->get('security.password_encoder');
+//        $passwordEncoded = $encoder->encodePassword($user, $data['password']);
+//
+//        if ($passwordEncoded == $user['password']){
+//
+//            return JsonResponse::create($user['roles'], 200);
+//        }
+//
+//        return new Response("User was created",400, "Bad Request");
+//
+//    }
 
 
 }

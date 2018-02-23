@@ -91,7 +91,7 @@ class Registration extends Component {
         } else {
             console.log('no');
             console.log( this.props);
-            this.context.history.push('/')
+            // this.context.history.push('/')
         }
 
         registration_array = JSON.stringify(registration_array);
