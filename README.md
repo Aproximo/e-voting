@@ -14,7 +14,7 @@ Front
 Back
 =
 
- * /api/humans (post)
+ * /api/form_authentication (post)
     * in: array [user_data]
     * out: http response(200, 401)
  * /api/article (get)
