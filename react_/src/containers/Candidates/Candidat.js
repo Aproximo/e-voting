@@ -13,7 +13,7 @@ const Candidat = (props) => {
     }
     return (
         <div>
-            <Link to='/candidates'>Back</Link>
+            <Link to='/presidential-elections'>Back</Link>
             <h1>{candidates.name}</h1>
             <img src={candidates.photo} alt="No photos"/>
             <h2>Партия: {candidates.consigment}</h2>
