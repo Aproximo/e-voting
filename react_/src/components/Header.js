@@ -10,10 +10,11 @@ const Header = () => (
         <nav className="main-nav">
             <ul>
                 <Link to="/"><li className="main-nav-order">Home</li></Link>
-                <Link to="/registration"><li className="main-nav-order">Регистрация</li></Link>
+                {/*<Link to="/registration"><li className="main-nav-order">Регистрация</li></Link>*/}
                 <Link to="/articles"><li className="main-nav-order">Новости</li></Link>
-                <Link to="/candidates"><li className="main-nav-order">Кандидаты</li></Link>
-                <Link to="/form"><li className="main-nav-order">Личный кабинет</li></Link>
+                {/*<Link to="/candidates"><li className="main-nav-order">Кандидаты</li></Link>*/}
+                <Link to="/personal"><li className="main-nav-order">Личный кабинет</li></Link>
+                <Link to="/voting"><li className="main-nav-order">Электронное голосование</li></Link>
             </ul>
         </nav>
     </div>
