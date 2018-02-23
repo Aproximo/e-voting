@@ -159,6 +159,7 @@ class Registration extends Component {
         .then((response) => {
             if(response.status === 201) {
                 this.handleChangeRegistrationStatus() ;
+                console.log('response',response);
             }
             console.log('response',response);
         })
