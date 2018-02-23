@@ -60,14 +60,14 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="$user_id")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="user_id")
      *
      */
     private $user_data;
 
 
 
-   public function  __construct($roles = ["ROLE_USER_NOT_AUTHORIZED"]){
+   public function  __construct($roles = ["ROLE_USER"]){
         $this->roles = $roles;
 
 

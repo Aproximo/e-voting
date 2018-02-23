@@ -22,7 +22,7 @@ class ArticleController extends Controller
      * article list page
      *
      * @Route("/api/article", name="api_article")
-     * @Template()
+     *
      */
     public function indexAction(){
         header("Access-Control-Allow-Origin: *");
@@ -43,7 +43,7 @@ class ArticleController extends Controller
      * sl - for tralling slash if its needed
      *
      * @Route("/api/article/{id}{sl}", name="api_article_page", defaults={"sl" : ""}, requirements={"id" : "[1-9][0-9]*","sl":"/?"})
-     * @Template()
+     *
      */
     public function showAction($id){
         header("Access-Control-Allow-Origin: *");

@@ -132,7 +132,26 @@ class Registration extends Component {
             password: this.state.password,
         };
 
+
+//         const email = this.state.email;
+//         const pass = this.state.password;
+
+//         window.localStorage.setItem('email', this.state.email);
+//         window.localStorage.setItem('pass',  this.state.password);
+
+//         if (email === 'a.myronow@gmail.com' && pass === '15975328') {//Узнать как хранить в локалсторадже неизмененные данные
+//             console.log('ok');
+//             console.log( this.context.router);
+//             console.log( this.props);
+//             this.context.history.push('/admin')
+//         } else {
+//             console.log('no');
+//             console.log( this.props);
+//             // this.context.history.push('/')
+//         }
+
         this.authenticate();
+
 
         registration_array = JSON.stringify(registration_array);
         axios.post('http://127.0.0.1:8000/api/registration', registration_array )
