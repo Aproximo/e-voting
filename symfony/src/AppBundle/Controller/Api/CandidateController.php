@@ -18,14 +18,20 @@ use Symfony\Component\HttpFoundation\Response;
 class CandidateController extends Controller
 {
 
+    public function __construct()
+    {
+        header("Access-Control-Allow-Origin: *");
+
+    }
+
     /**
      * article list page
      *
-     * @Route("/api/candidate", name="api_article")
+     * @Route("/api/candidate", name="api_candidate")
      *
      */
     public function indexAction(){
-        header("Access-Control-Allow-Origin: *");
+
 
         $repo = $this->get('doctrine')->getRepository('AppBundle:Candidate');
         $articles = $repo->findAll();
@@ -42,11 +48,11 @@ class CandidateController extends Controller
      * article by id
      * sl - for tralling slash if its needed
      *
-     * @Route("/api/candidate/{id}{sl}", name="api_article_page", defaults={"sl" : ""}, requirements={"id" : "[1-9][0-9]*","sl":"/?"})
+     * @Route("/api/candidate/{id}{sl}", name="api_candidate_page", defaults={"sl" : ""}, requirements={"id" : "[1-9][0-9]*","sl":"/?"})
      *
      */
     public function showAction($id){
-        header("Access-Control-Allow-Origin: *");
+
 
         $repo = $this->get('doctrine')->getRepository('AppBundle:Candidate');
         $article = $repo->find($id);

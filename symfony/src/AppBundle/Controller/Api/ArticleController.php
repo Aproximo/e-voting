@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        header("Access-Control-Allow-Origin: *");
+
+    }
 
     /**
      * article list page
@@ -25,7 +30,7 @@ class ArticleController extends Controller
      *
      */
     public function indexAction(){
-        header("Access-Control-Allow-Origin: *");
+
 
         $repo = $this->get('doctrine')->getRepository('AppBundle:Article');
         $articles = $repo->findAll();
@@ -46,7 +51,7 @@ class ArticleController extends Controller
      *
      */
     public function showAction($id){
-        header("Access-Control-Allow-Origin: *");
+
 
         $repo = $this->get('doctrine')->getRepository('AppBundle:Article');
         $article = $repo->find($id);
