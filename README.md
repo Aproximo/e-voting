@@ -27,6 +27,9 @@ Back
  * /api/registration (post)
     * in: array [login, password]   
     * out: http response (201, 400, 405)
+ * /api/candidate
+ * /api/candidate/{id}
+ 
 
 DB
 =

@@ -43,7 +43,7 @@ class Articles extends Component {
             return (
                         <li id={key}>
                             <Link to={`/articles/${item.id}`}>{item.title}</Link>
-                        </li>                 
+                        </li>
 
 
             )
@@ -60,9 +60,9 @@ class Articles extends Component {
         // console.log("render", {item});
         return (
             <div>
-<ul>
-                {item}
-</ul>
+                <ul>
+                    {item}
+                </ul>
                 <span>Articles</span>
             </div>
         )
