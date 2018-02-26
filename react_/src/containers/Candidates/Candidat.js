@@ -1,27 +1,44 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import CandidatAPI from '../../api/candidates_api'
+import React, {Component} from 'react';
+import axios from 'axios';
 
-const Candidat = (props) => {
-    const candidates = CandidatAPI.get(
-        parseInt(props.match.params.number, 10)
-    );
-    // console.log(candidates);
-
-    if (!candidates) {
-        return <div>Sorry, but the candidat was not found</div>
+class Candidat extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            candidat: {title : "loading"}
+        };
+        this.componentWillMount = this.componentWillMount.bind(this);
     }
-    return (
-        <div>
-            <Link to='/presidential-elections'>Back</Link>
-            <h1>{candidates.name}</h1>
-            <img src={candidates.photo} alt="No photos"/>
-            <h2>Партия: {candidates.consigment}</h2>
-            <h3>Предвыблорная програма кандидата</h3>
-            <p>{candidates.electioneering}</p>
 
-        </div>
-    )
+    componentWillMount() {
+        axios.get(`http://127.0.0.1:8000/api/candidat/${this.props.match.params.id}`)
+            .then(({ data }) => {
+                    this.setState({
+                        candidat: JSON.parse(data),
+                        item: ''
+                    });
+                    console.log(this.state.candidat);
+                }
+            )
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    render() {
+        let item = this.state.item;
+        return (
+            <div>
+                <ul>
+                    <li>{this.state.candidat.name}</li>
+                    <li>{this.state.candidat.photo}</li>
+                    <li>{this.state.candidat.consigment}</li>
+                    <li>{this.state.candidat.electioneering}</li>
+                </ul>
+                <span>Candidat</span>
+            </div>
+        )
+    }
 }
 
 export default Candidat

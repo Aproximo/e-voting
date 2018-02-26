@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-// import {Link} from 'react-router-dom';
-import '../../style/containers/Form.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
 
 class Article extends Component {
 
@@ -13,55 +9,36 @@ class Article extends Component {
             article: {title : "loading"}
         };
         this.componentWillMount = this.componentWillMount.bind(this);
-        this.toDo = this.toDo.bind(this);
     }
-
 
     componentWillMount() {
         axios.get(`http://127.0.0.1:8000/api/article/${this.props.match.params.id}`)
-            .then(({ data }) => {
-                    this.setState({
-                        article: JSON.parse(data),
-                        item: ''
-                    });
-                    console.log(this.state.article);
-                    this.toDo();
-                }
-            )
-            .catch(function (error) {
-                console.log(error);
+        .then(({ data }) => {
+            this.setState({
+                article: JSON.parse(data),
+                item: ''
             });
-
-    }
-
-    toDo(){
-        let $item = this.state.article.map((item, key) => {
-            return (
-                <li id={key}>{item.content}</li>
-            )
+            console.log(this.state.article);
+            }
+        )
+        .catch(function (error) {
+            console.log(error);
         });
-        this.setState({
-            item: $item
-        })
     }
-
-
-
 
     render() {
         let item = this.state.item;
-  
-
         return (
             <div>
-                {item}
+                <ul>
+                    <li>{this.state.article.title}</li>
+                    <li>{this.state.article.content}</li>
+                </ul>
                 <span>Article</span>
             </div>
-
         )
     }
 }
-
 
 export default Article;
 
