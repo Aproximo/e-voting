@@ -8,11 +8,15 @@ class Articles extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            article: {title : "loading"}
+            article: {title : "loading"},
+            choice: ''
         };
         this.componentWillMount = this.componentWillMount.bind(this);
         this.toDo = this.toDo.bind(this);
+        // this.addChoice = this.addChoice.bind(this);
     }
+
+
 
 
     componentWillMount() {
@@ -23,8 +27,8 @@ class Articles extends Component {
                         article: JSON.parse(data),
                         item: ''
                     });
-                console.log(this.state);
-                this.toDo();
+                    console.log(this.state);
+                    this.toDo();
                 }
 
             )
@@ -37,10 +41,11 @@ class Articles extends Component {
     toDo(){
         let $item = this.state.article.map((item, key) => {
             return (
-                <div id={key}>
-                    <Link to={`/article/${item.id}`}>{item.title}</Link>
-                    <span >{item.content}</span>
-                </div>
+                        <li id={key}>
+                            <Link to={`/articles/${item.id}`}>{item.title}</Link>
+                        </li>                 
+
+
             )
         });
         // console.log("toDo", $item);
@@ -54,10 +59,12 @@ class Articles extends Component {
         let item = this.state.item;
         // console.log("render", {item});
         return (
-           <div>
-               {item}
-               <span>Articles</span>
-           </div>
+            <div>
+<ul>
+                {item}
+</ul>
+                <span>Articles</span>
+            </div>
         )
     }
 }

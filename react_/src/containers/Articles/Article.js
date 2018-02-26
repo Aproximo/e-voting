@@ -4,7 +4,9 @@ import '../../style/containers/Form.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-class Articles extends Component {
+
+class Article extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,10 +23,11 @@ class Articles extends Component {
             .then(({ data }) => {
                     this.setState({
                         article: JSON.parse(data),
-                        item: ''
+
                     });
-                console.log(this.state);
-                // this.toDo();
+                    console.log(this.state);
+                    
+
                 }
 
             )
@@ -34,34 +37,23 @@ class Articles extends Component {
 
 
     }
-    // toDo(){
-    //     let $item = this.state.article.map((item, key) => {
-    //         return (
-    //             <div id={key}>
-    //                 <Link to={`/articles/${item.id}`}>{item.title}</Link>
-    //                 <span >{item.content}</span>
-    //             </div>
-    //         )
-    //     });
-    //     // console.log("toDo", $item);
-    //     this.setState({
-    //         item: $item
-    //     })
-    // }
+
 
 
     render() {
         let item = this.state.item;
-        console.log('this - ', this.props.match.params.id);
-        console.log("bla");
-         console.log("render", {item});
+  
+
         return (
-           <div>
-               {item}
-               <span>Articles</span>
-           </div>
+            <div>
+                {item}
+                <span>Article</span>
+            </div>
+
         )
     }
 }
 
-export default Articles;
+
+export default Article;
+

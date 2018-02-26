@@ -8,41 +8,41 @@ import {FormErrors} from './FormErrors';
 import axios from "axios/index";
 
 
-export const AuthButton = withRouter(
-    ({ history }) =>
-        this.isAuthenticated ? (
-            <p>
-                Welcome!{" "}
-                <button
-                    onClick={() => {
-                        this.signOut(() => history.push("/"));
-                    }}
-                >
-                    Sign out
-                </button>
-            </p>
-        ) : (
-            <p>You are not logged in.</p>
-        )
-);
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={props =>
-            this.isAuthenticated ? (
-                <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: "/registration",
-                        state: { from: props.location }
-                    }}
-                />
-            )
-        }
-    />
-);
+// export const AuthButton = withRouter(
+//     ({ history }) =>
+//         this.isAuthenticated ? (
+//             <p>
+//                 Welcome!{" "}
+//                 <button
+//                     onClick={() => {
+//                         this.signOut(() => history.push("/"));
+//                     }}
+//                 >
+//                     Sign out
+//                 </button>
+//             </p>
+//         ) : (
+//             <p>You are not logged in.</p>
+//         )
+// );
+//
+// export const PrivateRoute = ({ component: Component, ...rest }) => (
+//     <Route
+//         {...rest}
+//         render={props =>
+//             this.isAuthenticated ? (
+//                 <Component {...props} />
+//             ) : (
+//                 <Redirect
+//                     to={{
+//                         pathname: "/registration",
+//                         state: { from: props.location }
+//                     }}
+//                 />
+//             )
+//         }
+//     />
+// );
 
 class Registration extends Component {
     constructor(props) {
@@ -169,12 +169,12 @@ class Registration extends Component {
     }
 
     render() {
-        console.log(this.state.isAuthenticated, this.props.location.state );
-        const { from } = this.props.location.state || { from: { pathname: "/" } };
-
-        if (this.redirectToReferrer) {
-            return <Redirect to={from} />;
-        }
+        // console.log(this.state.isAuthenticated, this.props.location.state );
+        // const { from } = this.props.location.state || { from: { pathname: "/" } };
+        //
+        // if (this.redirectToReferrer) {
+        //     return <Redirect to={from} />;
+        // }
 
         return (
             <form onSubmit={this.handleSubmitRegistration} className="RegistrationForm">
@@ -197,7 +197,7 @@ class Registration extends Component {
                            onChange={this.handleUserInput}  />
                 </div>
                 <button type="submit" disabled={!this.state.formValid}>Sign up</button>
-                <AuthButton/>
+                {/*<AuthButton/>*/}
             </form>
         )
     }
