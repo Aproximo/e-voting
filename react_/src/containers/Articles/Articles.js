@@ -37,8 +37,9 @@ class Articles extends Component {
         let $item = this.state.article.map((item, key) => {
             return (
                         <li id={key}>
-                            <Link to={`/article/${item.id}`}>{item.title}</Link>
-                        </li>                 
+
+                            <Link to={`/articles/${item.id}`}>{item.title}</Link>
+                        </li>
 
 
             )
