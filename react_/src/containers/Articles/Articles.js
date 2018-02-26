@@ -41,15 +41,11 @@ class Articles extends Component {
     toDo(){
         let $item = this.state.article.map((item, key) => {
             return (
-                <div >
-                    <ul>
                         <li id={key}>
                             <Link to={`/articles/${item.id}`}>{item.title}</Link>
-                        </li>
-                    </ul>
+                        </li>                 
 
-                    <span >{item.content}</span>
-                </div>
+
             )
         });
         // console.log("toDo", $item);
@@ -64,7 +60,9 @@ class Articles extends Component {
         // console.log("render", {item});
         return (
             <div>
+<ul>
                 {item}
+</ul>
                 <span>Articles</span>
             </div>
         )

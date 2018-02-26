@@ -11,6 +11,8 @@ import ArticleRoutes from "../containers/Articles/Routes";
 import Routes from "../containers/Candidates/Routes";
 import Personal from '../containers/Personal/Personal';
 import Articles from '../containers/Articles/Articles';
+import Articlе from '../containers/Articles/Article';
+
 import Form from '../containers/Form/Form';
 import Admin from '../components/Admin';
 import '../style/components/Main.css';
@@ -26,6 +28,7 @@ class Main extends React.Component {
                     <Route path='/form' component={Form}/>
                     <Route path='/registration' component={Registration}/>
                     <Route path='/articles' component={ArticleRoutes}/>
+                    <Route path='/article/:id' component={Articlе}/>
                     <Route path='/voting' component={Voting}/>
                     <Route path='/presidential-elections' component={Routes}/>
                     <Route path='/admin' component={Admin}/>
@@ -39,19 +42,4 @@ class Main extends React.Component {
 
 export default Main
 
-// const Main = () => (
-//     <Router>
-//         <div className='main-div'>
-//             <Route exact path="/" component={Home} />
-//             <PrivateRoute path='/personal' component={Personal}/>
-//             <Route path="/registration" component={Registration} />
-//             <Route path="/articles" component={Articles}/>
-//             <PrivateRoute path="/voting" component={Voting} />
-//             <PrivateRoute path='/presidential-elections' component={Routes}/>
-//         </div>
-//     </Router>
-// );
-
-
-// export default Main;
 
