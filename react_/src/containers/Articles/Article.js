@@ -13,30 +13,38 @@ class Article extends Component {
             article: {title : "loading"}
         };
         this.componentWillMount = this.componentWillMount.bind(this);
-        // this.toDo = this.toDo.bind(this);
+        this.toDo = this.toDo.bind(this);
     }
 
 
     componentWillMount() {
-        // console.log("hi");
         axios.get(`http://127.0.0.1:8000/api/article/${this.props.match.params.id}`)
             .then(({ data }) => {
                     this.setState({
                         article: JSON.parse(data),
-
+                        item: ''
                     });
-                    console.log(this.state);
-                    
-
+                    console.log(this.state.article);
+                    this.toDo();
                 }
-
             )
             .catch(function (error) {
                 console.log(error);
             });
 
-
     }
+
+    toDo(){
+        let $item = this.state.article.map((item, key) => {
+            return (
+                <li id={key}>{item.content}</li>
+            )
+        });
+        this.setState({
+            item: $item
+        })
+    }
+
 
 
 

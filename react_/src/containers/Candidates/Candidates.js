@@ -1,20 +1,18 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import candidates from '../../json/candidates'
+import axios from 'axios';
 
 class Candidates extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
+            candidats: '',
             choice: ''
         };
         this.Choice = this.Choice.bind(this);
-
-
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.toDo = this.toDo.bind(this);
     }
-
-
 
     Choice(e) {
         this.setState({
@@ -22,24 +20,45 @@ class Candidates extends Component {
         })
     }
 
+    componentWillMount() {
+        axios.get('http://127.0.0.1:8000/api/candidates')
+            .then(({ data }) => {
+                    this.setState({
+                        candidats: JSON.parse(data),
+                        item: ''
+                    });
+                    console.log(this.state);
+                    this.toDo();
+                }
+            )
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    }
+    toDo(){
+        let $item = this.state.candidates.map((item, key) => {
+            return (
+                <li id={key}>
+                    <Link to={`/candidates/${item.id}`}>{item.name}</Link>
+                    <button onClick={this.Choice}>Проголосовать</button>
+                </li>
+            )
+        });
+        this.setState({
+            item: $item
+        })
+    }
+
     render() {
+        let item = this.state.item;
         return (
             <div>
-                {/*<nav>*/}
-                    {/*<ul>*/}
-                        {/*{candidates.map((tab) =>*/}
-                            {/*<li key={tab.id}>*/}
-                                {/*<Link to={`/presidential-elections/${tab.id}`}>{tab.name}</Link>*/}
-                                {/*<button onClick={this.Choice}></button>*/}
-                            {/*</li>*/}
-                        {/*)}*/}
-                    {/*</ul>*/}
-
-                {/*</nav>*/}
-                {/*<main>*/}
-                    {/*{children}*/}
-                {/*</main>*/}
-                Hello
+                <ul>
+                    {item}
+                </ul>
+                <span>Candidates</span>
             </div>
         )
     }
