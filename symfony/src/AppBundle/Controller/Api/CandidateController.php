@@ -15,7 +15,7 @@ use AppBundle\Entity\Accounts;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController extends Controller
+class CandidateController extends Controller
 {
 
     /**
