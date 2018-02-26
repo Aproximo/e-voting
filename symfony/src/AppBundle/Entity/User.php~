@@ -60,18 +60,29 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="$user_id")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="user_id")
      *
      */
     private $user_data;
 
 
+    /**
+     * @var  boolean $isVoted
+     * @ORM\Column(name="is_voted", type="boolean")
+     */
+    private $isVoted;
 
-   public function  __construct($roles = ["ROLE_USER_NOT_AUTHORIZED"]){
+    /**
+     * @var integer $choice
+     * @ORM\Column(name="choice", type="integer", type="smallint", nullable=true)
+     */
+    private $choice;
+
+
+
+   public function  __construct($roles = ["ROLE_USER"]){
         $this->roles = $roles;
-
-
-}
+    }
 
 
 
@@ -212,4 +223,28 @@ class User implements UserInterface
         return $this;
     }
 
+
+    /**
+     * Set userData
+     *
+     * @param \AppBundle\Entity\UserData $userData
+     *
+     * @return User
+     */
+    public function setUserData(\AppBundle\Entity\UserData $userData = null)
+    {
+        $this->user_data = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Get userData
+     *
+     * @return \AppBundle\Entity\UserData
+     */
+    public function getUserData()
+    {
+        return $this->user_data;
+    }
 }

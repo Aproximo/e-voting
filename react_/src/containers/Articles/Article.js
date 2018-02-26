@@ -4,31 +4,26 @@ import '../../style/containers/Form.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-class Articles extends Component {
+class Article extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            article: {title : "loading"},
-            choice: ''
+            article: {title : "loading"}
         };
         this.componentWillMount = this.componentWillMount.bind(this);
-        this.toDo = this.toDo.bind(this);
-        // this.addChoice = this.addChoice.bind(this);
+        // this.toDo = this.toDo.bind(this);
     }
-
-
 
 
     componentWillMount() {
         // console.log("hi");
-        axios.get('http://127.0.0.1:8000/api/article')
+        axios.get(`http://127.0.0.1:8000/api/article/${this.props.match.params.id}`)
             .then(({ data }) => {
                     this.setState({
                         article: JSON.parse(data),
-                        item: ''
                     });
                     console.log(this.state);
-                    this.toDo();
+                    // this.toDo();
                 }
 
             )
@@ -38,37 +33,37 @@ class Articles extends Component {
 
 
     }
-    toDo(){
-        let $item = this.state.article.map((item, key) => {
+     toDo() {
+        let item = this.state.article.map((item, key) => {
             return (
-                <div >
+                <div>
+                    <Link to={`/articles/`}>Назад</Link>
                     <ul>
-                        <li id={key}>
-                            <Link to={`/articles/${item.id}`}>{item.title}</Link>
-                        </li>
+                        <li> {item.content}</li>
                     </ul>
 
-                    <span >{item.content}</span>
+
                 </div>
             )
         });
-        // console.log("toDo", $item);
         this.setState({
-            item: $item
-        })
+            item: item
+        });
     }
 
 
     render() {
         let item = this.state.item;
-        // console.log("render", {item});
+        console.log('this - ', this.props.match.params.id);
+        console.log("bla");
+        console.log("render", {item});
         return (
             <div>
                 {item}
-                <span>Articles</span>
+                <span>Article</span>
             </div>
         )
     }
 }
 
-export default Articles;
+export default Article;
