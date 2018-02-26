@@ -11,20 +11,20 @@ class Articles extends Component {
             article: {title : "loading"}
         };
         this.componentWillMount = this.componentWillMount.bind(this);
-        this.toDo = this.toDo.bind(this);
+        // this.toDo = this.toDo.bind(this);
     }
 
 
     componentWillMount() {
         // console.log("hi");
-        axios.get('http://127.0.0.1:8000/api/article')
+        axios.get(`http://127.0.0.1:8000/api/article/${this.props.match.params.id}`)
             .then(({ data }) => {
                     this.setState({
                         article: JSON.parse(data),
                         item: ''
                     });
                 console.log(this.state);
-                this.toDo();
+                // this.toDo();
                 }
 
             )
@@ -34,25 +34,27 @@ class Articles extends Component {
 
 
     }
-    toDo(){
-        let $item = this.state.article.map((item, key) => {
-            return (
-                <div id={key}>
-                    <Link to={`/article/${item.id}`}>{item.title}</Link>
-                    <span >{item.content}</span>
-                </div>
-            )
-        });
-        // console.log("toDo", $item);
-        this.setState({
-            item: $item
-        })
-    }
+    // toDo(){
+    //     let $item = this.state.article.map((item, key) => {
+    //         return (
+    //             <div id={key}>
+    //                 <Link to={`/articles/${item.id}`}>{item.title}</Link>
+    //                 <span >{item.content}</span>
+    //             </div>
+    //         )
+    //     });
+    //     // console.log("toDo", $item);
+    //     this.setState({
+    //         item: $item
+    //     })
+    // }
 
 
     render() {
         let item = this.state.item;
-        // console.log("render", {item});
+        console.log('this - ', this.props.match.params.id);
+        console.log("bla");
+         console.log("render", {item});
         return (
            <div>
                {item}
