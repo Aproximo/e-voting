@@ -6,7 +6,7 @@ import Candidat from './Candidat'
 const Routes = () => (
     <Switch>
         <Route exact path='/candidates' component={Candidates}/>
-        <Route path='/candidate/:number' component={Candidat}/>
+        <Route path='/candidate/:id' component={Candidat}/>
     </Switch>
 )
 

@@ -11,7 +11,7 @@ class Candidat extends Component {
     }
 
     componentWillMount() {
-        axios.get(`http://127.0.0.1:8000/api/candidat/${this.props.match.params.id}`)
+        axios.get(`http://127.0.0.1:8000/api/candidate/${this.props.match.params.id}`)
             .then(({ data }) => {
                     this.setState({
                         candidat: JSON.parse(data),
@@ -30,10 +30,10 @@ class Candidat extends Component {
         return (
             <div>
                 <ul>
-                    <li>{this.state.candidat.name}</li>
-                    <li>{this.state.candidat.photo}</li>
-                    <li>{this.state.candidat.consigment}</li>
-                    <li>{this.state.candidat.electioneering}</li>
+                    <li>{this.state.candidat.name}</li><br/>
+                    <img src={this.state.candidat.photo} alt="xxx"/><br/>
+                    <li>{this.state.candidat.consigment}</li><br/>
+                    <li>{this.state.candidat.electioneering}</li><br/>
                 </ul>
                 <span>Candidat</span>
             </div>

@@ -33,7 +33,7 @@ class Main extends React.Component {
                     <Route path='/admin' component={Admin}/>
                     <Route path='/personal' component={Personal}/>
                     <Route path='/candidates' component={CandidatRoutes}/>
-                    <Route path='/candidat/:id' component={Candidat}/>
+                    <Route path='/candidate/:id' component={Candidat}/>
                 </Switch>
             </main>
         )
