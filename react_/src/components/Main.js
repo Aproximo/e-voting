@@ -9,6 +9,7 @@ import Home from '../components/Home';
 import Routes from "../containers/Candidates/Routes";
 import Personal from '../containers/Personal/Personal';
 import Articles from '../containers/Articles/Articles';
+import Articlе from '../containers/Articles/Article';
 import '../style/components/Main.css';
 
 //
@@ -42,6 +43,7 @@ const Main = () => (
             <PrivateRoute path='/personal' component={Personal}/>
             <Route path="/registration" component={Registration} />
             <Route path="/articles" component={Articles}/>
+            <Route path='/article/:id' component={Articlе}/>
             <PrivateRoute path="/voting" component={Voting} />
             <PrivateRoute path='/presidential-elections' component={Routes}/>
         </div>
