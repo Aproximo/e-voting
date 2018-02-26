@@ -21,7 +21,7 @@ class Candidates extends Component {
     }
 
     componentWillMount() {
-        axios.get('http://127.0.0.1:8000/api/candidates')
+        axios.get('http://127.0.0.1:8000/api/candidate')
             .then(({ data }) => {
                     this.setState({
                         candidats: JSON.parse(data),
@@ -38,16 +38,16 @@ class Candidates extends Component {
 
     }
     toDo(){
-        let $item = this.state.candidates.map((item, key) => {
+        let item = this.state.candidats.map((item, key) => {
             return (
                 <li id={key}>
-                    <Link to={`/candidates/${item.id}`}>{item.name}</Link>
+                    <Link to={`/candidate/${item.id}`}>{item.name}</Link>
                     <button onClick={this.Choice}>Проголосовать</button>
                 </li>
             )
         });
         this.setState({
-            item: $item
+            item: item
         })
     }
 
