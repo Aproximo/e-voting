@@ -6,7 +6,7 @@ import Article from './Article'
 const ArticleRoutes = () => (
     <Switch>
         <Route exact path='/articles' component={Articles}/>
-        <Route path='/articles/:id' component={Article}/>
+        <Route path='/article/:id' component={Article}/>
     </Switch>
 )
 
