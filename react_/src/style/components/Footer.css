@@ -1,7 +1,6 @@
 .footer {
-    flex: 0 0 auto;
     height: 7vh;
-    background-color: slategray;
-    color: cornsilk;
-    padding: 1% 0 0 10%;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 1% 0 0 5%;
 }

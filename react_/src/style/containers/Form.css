@@ -1,16 +1,16 @@
 .form {
     padding-left: 150px;
-   width: 200px;
+    width: 200px;
 }
 
 .form-field {
-    color: slategray;
+    color: #000000;
     font-size: 20px;
 }
 
 .form-field-input {
     width: 200px;
     height: 30px;
-    border: 2px solid slategray;
+    border: 2px solid #000000;
     display: inline-block;
 }

@@ -52,7 +52,7 @@ class Candidat extends Component {
         localStorage.getItem('name') && this.setState({
             name: localStorage.getItem('name'),
             isLoading: false
-        }),
+        })
 
         axios.get(`http://127.0.0.1:8000/api/candidate/${this.props.match.params.id}`)
             .then(({ data }) => {
@@ -71,7 +71,6 @@ class Candidat extends Component {
         console.log(this.state);
         return (
             <div>
-
                     <p>{this.state.candidat.name}</p><br/>
                 <button onClick={this.handleSubmitChoice}>Проголосовать</button>
                     <img src={this.state.candidat.photo} alt="xxx"/><br/>

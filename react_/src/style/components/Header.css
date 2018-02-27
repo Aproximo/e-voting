@@ -1,40 +1,36 @@
 .main-header {
-    /*width: 100vw;*/
     height: 7vh;
-    background-color: slategray;
-    color: cornsilk;
-    padding: 1% 0 0 10%;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 1% 0 0 5%;
 }
 
 .main-header-icon {
-    text-decoration: none;
-    color: cornsilk;
+    list-style-type: none;
+    color: #ffffff;
     font-size: 30px;
-    hover: orange;
+}
+
+.main-header-icon:hover {
+    color: orange;
 }
 
 .main-nav {
-    /*width: 100vw;*/
     height: 10vh;
-    color: slategray;
+    color: #000000;
     padding: 1% 5% 1% 5%;
 }
 
 .main-nav-order {
-    margin: 10px;
-}
-
-ul, li, a {
     display: inline;
     list-style-type: none;
     margin: 2% 0 2% 0;
     text-decoration: none;
-    color: slategray;
+    color: #000000;
     font-size: 20px;
-
 }
 
-ul, li:hover, a:hover {
+.main-nav-order:hover {
     color: orange;
 }
 
