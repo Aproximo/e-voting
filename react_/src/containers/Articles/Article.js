@@ -27,7 +27,6 @@ class Article extends Component {
     }
 
     render() {
-        let item = this.state.item;
         return (
             <div>
                 <ul>

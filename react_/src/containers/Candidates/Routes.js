@@ -5,7 +5,7 @@ import Candidat from './Candidat'
 
 const Routes = () => (
     <Switch>
-        <Route exact path='/candidates' component={Candidates}/>
+        <Route exact path='/presidential-elections' component={Candidates}/>
         <Route path='/candidate/:id' component={Candidat}/>
     </Switch>
 )

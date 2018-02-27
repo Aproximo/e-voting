@@ -8,41 +8,41 @@ import {FormErrors} from './FormErrors';
 import axios from "axios/index";
 
 
-// export const AuthButton = withRouter(
-//     ({ history }) =>
-//         this.isAuthenticated ? (
-//             <p>
-//                 Welcome!{" "}
-//                 <button
-//                     onClick={() => {
-//                         this.signOut(() => history.push("/"));
-//                     }}
-//                 >
-//                     Sign out
-//                 </button>
-//             </p>
-//         ) : (
-//             <p>You are not logged in.</p>
-//         )
-// );
-//
-// export const PrivateRoute = ({ component: Component, ...rest }) => (
-//     <Route
-//         {...rest}
-//         render={props =>
-//             this.isAuthenticated ? (
-//                 <Component {...props} />
-//             ) : (
-//                 <Redirect
-//                     to={{
-//                         pathname: "/registration",
-//                         state: { from: props.location }
-//                     }}
-//                 />
-//             )
-//         }
-//     />
-// );
+export const AuthButton = withRouter(
+    ({ history }) =>
+        this.isAuthenticated ? (
+            <p>
+                Welcome!{" "}
+                <button
+                    onClick={() => {
+                        this.signOut(() => history.push("/"));
+                    }}
+                >
+                    Sign out
+                </button>
+            </p>
+        ) : (
+            <p>You are not logged in.</p>
+        )
+);
+
+export const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            this.isAuthenticated ? (
+                <Component {...props} />
+            ) : (
+                <Redirect
+                    to={{
+                        pathname: "/registration",
+                        state: { from: props.location }
+                    }}
+                />
+            )
+        }
+    />
+);
 
 class Registration extends Component {
     constructor(props) {
@@ -50,7 +50,8 @@ class Registration extends Component {
         this.state = {
             email: '',
             password: '',
-            formErrors: {email: '', password: ''},
+            name: '',
+            formErrors: {email: '', password: '', name: ''},
             emailValid: false,
             passwordValid: false,
             formValid: false,
@@ -89,10 +90,15 @@ class Registration extends Component {
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
+        let nameValid = this.state.nameValid;
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
 
         switch(fieldName) {
+            case 'name':
+                nameValid = value.length >= 3;
+                fieldValidationErrors.name = nameValid ? '': ' is too short';
+                break;
             case 'email':
                 emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
                 fieldValidationErrors.email = emailValid ? '' : ' is invalid';
@@ -104,7 +110,9 @@ class Registration extends Component {
             default:
                 break;
         }
-        this.setState({formErrors: fieldValidationErrors,
+        this.setState({
+            formErrors: fieldValidationErrors,
+            namelValid: nameValid,
             emailValid: emailValid,
             passwordValid: passwordValid
         },
@@ -128,27 +136,15 @@ class Registration extends Component {
     handleSubmitRegistration(e) {
         e.preventDefault();
         let registration_array = {
+            name: this.state.name,
             email: this.state.email,
             password: this.state.password,
         };
-
-
-//         const email = this.state.email;
-//         const pass = this.state.password;
-
-//         window.localStorage.setItem('email', this.state.email);
-//         window.localStorage.setItem('pass',  this.state.password);
-
-//         if (email === 'a.myronow@gmail.com' && pass === '15975328') {//Узнать как хранить в локалсторадже неизмененные данные
-//             console.log('ok');
-//             console.log( this.context.router);
-//             console.log( this.props);
-//             this.context.history.push('/admin')
-//         } else {
-//             console.log('no');
-//             console.log( this.props);
-//             // this.context.history.push('/')
-//         }
+        this.setState({
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password
+        });
 
         this.authenticate();
 
@@ -159,6 +155,7 @@ class Registration extends Component {
         .then((response) => {
             if(response.status === 201) {
                 this.handleChangeRegistrationStatus() ;
+
                 console.log('response',response);
             }
             console.log('response',response);
@@ -168,19 +165,31 @@ class Registration extends Component {
         });
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem('name', this.state.name)
+    }
+
     render() {
-        // console.log(this.state.isAuthenticated, this.props.location.state );
-        // const { from } = this.props.location.state || { from: { pathname: "/" } };
-        //
-        // if (this.redirectToReferrer) {
-        //     return <Redirect to={from} />;
-        // }
+        console.log(this.state);
+        console.log(this.state.isAuthenticated, this.props.location.state );
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+
+        if (this.redirectToReferrer) {
+            return <Redirect to={from} />;
+        }
 
         return (
             <form onSubmit={this.handleSubmitRegistration} className="RegistrationForm">
                 <h2>Sign up</h2>
                 <div className="panel panel-default">
                     <FormErrors formErrors={this.state.formErrors} />
+                </div>
+                <div className={`RegistrationForm_input ${this.errorClass(this.state.formErrors.name)}`}>
+                    <label htmlFor="name">Name</label>
+                    <input type="text" required name="name"
+                           placeholder="Name"
+                           value={this.state.name}
+                           onChange={this.handleUserInput}  />
                 </div>
                 <div className={`RegistrationForm_input ${this.errorClass(this.state.formErrors.email)}`}>
                     <label htmlFor="email">Email address</label>
@@ -197,7 +206,7 @@ class Registration extends Component {
                            onChange={this.handleUserInput}  />
                 </div>
                 <button type="submit" disabled={!this.state.formValid}>Sign up</button>
-                {/*<AuthButton/>*/}
+                <AuthButton/>
             </form>
         )
     }
