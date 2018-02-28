@@ -6,18 +6,12 @@ class Candidates extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            candidats: '',
-            choice: ''
+            candidats: {title : "loading"},
+
         };
-        this.Choice = this.Choice.bind(this);
+
         this.componentWillMount = this.componentWillMount.bind(this);
         this.toDo = this.toDo.bind(this);
-    }
-
-    Choice(e) {
-        this.setState({
-            choice: +1
-        })
     }
 
     componentWillMount() {
@@ -42,16 +36,18 @@ class Candidates extends Component {
             return (
                 <li id={key}>
                     <Link to={`/candidate/${item.id}`}>{item.name}</Link>
-                    <button onClick={this.Choice}>Проголосовать</button>
+
                 </li>
             )
         });
         this.setState({
-            item: item
+            item: item,
+            candidat_id: item.id
         })
     }
 
     render() {
+        console.log(this.props)
         let item = this.state.item;
         return (
             <div>

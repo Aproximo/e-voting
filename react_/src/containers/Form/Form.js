@@ -3,7 +3,6 @@ import '../../style/containers/Form.css';
 import axios from 'axios'
 import Articles from "../Articles/Articles";
 
-
     class Form extends Component {
 
     constructor(props) {
@@ -94,32 +93,18 @@ import Articles from "../Articles/Articles";
         array = JSON.stringify(array);
 
         axios.post('http://127.0.0.1:8000/api/humans', array )
-
-            .then((response) => {
-                if(response.status === 200) {
-                        this.handleChangeStatus() ;
-                        // console.log(ok);
-                }
-                console.log('response',response);
-            })
-
-
-            .catch(function (error) {
-                console.log("error", error);
-            });
-
-
-
+        .then((response) => {
+            if(response.status === 200) {
+                this.handleChangeStatus() ;
+            }
+        })
+        .catch(function (error) {
+            console.log("error", error);
+        });
     }
 
-
-
     render() {
-
         console.log(this.state);
-
-
-
         if (this.state.status === 200){
                 console.log(this.state.status)
             return (
@@ -159,7 +144,6 @@ import Articles from "../Articles/Articles";
                             <input type="text" value={this.state.valid_until} onChange={this.handleValidChange} className="form-field-input"/>
                         </label>
 
-
                         <button>Save</button>
                         <div>
                             <p>* itn ‎9999999999</p>
@@ -169,7 +153,6 @@ import Articles from "../Articles/Articles";
                             <p>* surname Doe</p>
                             <p>* date_of_birthday ‎2018-02-14</p>
                             <p>* valid_until ‎2018-02-14</p>
-
                         </div>
                     </div>
                 </form>
