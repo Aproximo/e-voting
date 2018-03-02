@@ -15,7 +15,7 @@ class Footer extends Component {
     render() {
         return (
             <div className="footer">
-                Development and designed by Aleksandr Myronov and Aleksandr Aproximo (Сори не знаю твою фамилию)<br/>
+                Development and designed by Aleksandr Myronov and Aproximo<br/>
                 <a href="https://github.com/Aproximo/e-voting">Project on GITHub</a><br/>
                 All rights reserved &#169;
             </div>
