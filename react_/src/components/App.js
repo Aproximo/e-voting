@@ -1,21 +1,17 @@
-import React, {Component} from 'react';
-import Applicants from '../containers/App/Applicants';
-import applicants from "../json/applicants";
-import humans from '../json/humans';
-import Form from '../containers/App/Form';
-import Check from "../containers/App/Check";
+import React from 'react';
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import Aside from "./Aside";
 
-class App extends Component {
-  render () {
-    return (
-        <div>
-            <Applicants items={applicants}/>
-            <Form/>
-            <Check items={humans}/>
-        </div>
-
-    )
-  }
-}
+const App = () => (
+    <div>
+        <Header/>
+        <Main/>
+        <Aside/>
+        <Footer/>
+    </div>
+);
 
 export default App;
+

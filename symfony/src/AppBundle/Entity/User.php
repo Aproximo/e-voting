@@ -60,18 +60,29 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="$user_id")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserData", mappedBy="user_id")
      *
      */
     private $user_data;
 
 
+    /**
+     * @var  boolean $isVoted
+     * @ORM\Column(name="is_voted", type="boolean")
+     */
+    private $isVoted;
 
-   public function  __construct($roles = ["ROLE_USER_NOT_AUTHORIZED"]){
+    /**
+     * @var integer $choice
+     * @ORM\Column(name="choice", type="integer", type="smallint", nullable=true)
+     */
+    private $choice;
+
+
+
+   public function  __construct($roles = ["ROLE_USER"]){
         $this->roles = $roles;
-
-
-}
+    }
 
 
 
@@ -235,5 +246,53 @@ class User implements UserInterface
     public function getUserData()
     {
         return $this->user_data;
+    }
+
+    /**
+     * Set isVoted
+     *
+     * @param boolean $isVoted
+     *
+     * @return User
+     */
+    public function setIsVoted($isVoted)
+    {
+        $this->isVoted = $isVoted;
+
+        return $this;
+    }
+
+    /**
+     * Get isVoted
+     *
+     * @return boolean
+     */
+    public function getIsVoted()
+    {
+        return $this->isVoted;
+    }
+
+    /**
+     * Set choice
+     *
+     * @param integer $choice
+     *
+     * @return User
+     */
+    public function setChoice($choice)
+    {
+        $this->choice = $choice;
+
+        return $this;
+    }
+
+    /**
+     * Get choice
+     *
+     * @return integer
+     */
+    public function getChoice()
+    {
+        return $this->choice;
     }
 }

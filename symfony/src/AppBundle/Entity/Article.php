@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
- * @ORM\Table(name="article")
+ * @ORM\Table(name="articles")
  */
 class Article
 {
@@ -39,6 +39,7 @@ class Article
     /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
+     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
      */
     private $category;
 

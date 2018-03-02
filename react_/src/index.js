@@ -1,19 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import './style/index.css';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-import Main from "./components/Main";
 import App from "./components/App";
-// import Login from "./containers/App/Login";
 
-ReactDOM.render((
+
+render((
     <BrowserRouter>
-        <div>
-            <Route path="/" component={Main}/>
-            <Route path="/form" component={App}/>
-            {/*<Route path="/login" component={Login}/>*/}
-        </div>
+        <App/>
     </BrowserRouter>),
     document.getElementById('root')
 );

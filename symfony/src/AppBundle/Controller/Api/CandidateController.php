@@ -15,8 +15,9 @@ use AppBundle\Entity\Accounts;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController extends Controller
+class CandidateController extends Controller
 {
+
     public function __construct()
     {
         header("Access-Control-Allow-Origin: *");
@@ -26,13 +27,13 @@ class ArticleController extends Controller
     /**
      * article list page
      *
-     * @Route("/api/article", name="api_article")
+     * @Route("/api/candidate", name="api_candidate")
      *
      */
     public function indexAction(){
 
 
-        $repo = $this->get('doctrine')->getRepository('AppBundle:Article');
+        $repo = $this->get('doctrine')->getRepository('AppBundle:Candidate');
         $articles = $repo->findAll();
 
         $array = $this->get('jms_serializer')->serialize($articles, 'json');
@@ -47,13 +48,13 @@ class ArticleController extends Controller
      * article by id
      * sl - for tralling slash if its needed
      *
-     * @Route("/api/article/{id}{sl}", name="api_article_page", defaults={"sl" : ""}, requirements={"id" : "[1-9][0-9]*","sl":"/?"})
+     * @Route("/api/candidate/{id}{sl}", name="api_candidate_page", defaults={"sl" : ""}, requirements={"id" : "[1-9][0-9]*","sl":"/?"})
      *
      */
     public function showAction($id){
 
 
-        $repo = $this->get('doctrine')->getRepository('AppBundle:Article');
+        $repo = $this->get('doctrine')->getRepository('AppBundle:Candidate');
         $article = $repo->find($id);
 
         if(!$article){
@@ -68,12 +69,5 @@ class ArticleController extends Controller
     }
 
 
-
-//        $article->setTitle('Symfony start')->setContent('Some text bla bla');
-//
-//        $em = $this->get('doctrine')->getManager();
-//
-//        $em->persist($article);
-//        $em->flush();
 
 }

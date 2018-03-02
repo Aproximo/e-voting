@@ -1,0 +1,16 @@
+.aside {
+    display: inline-block;
+    width: 15%;
+    text-align: center;
+}
+
+.aside-advertising-img {
+    width: 250px;
+    height: 100px;
+}
+
+.aside-advertising-img:hover {
+    border: 2px solid orange;
+    border-radius: 15px;
+    width: 210px;
+}

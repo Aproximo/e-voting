@@ -28,4 +28,22 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    /**
+     *
+     * @param $value
+     * @return array
+     */
+    public function getByEmail($value){
+
+        $return = $this->getEntityManager()
+            ->createQuery(
+                "SELECT user FROM AppBundle:User user  WHERE user.email = :value "
+            )
+            ->setParameter( 'value', "$value")
+            ->getResult();
+
+        return $return;
+
+    }
+
 }

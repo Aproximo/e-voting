@@ -9,23 +9,33 @@
 namespace AppBundle\Controller\Api;
 
 
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Entity\User;
+
 
 
 class AuthorizationController extends Controller
 {
+
+    public function __construct()
+    {
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Headers: Content-Type, *');
+    }
+
     /**
      * @Route("/api/users", name="api")
      *
      */
     public function indexAction(Request $request)
-    {   header("Access-Control-Allow-Origin: *");
+    {
 //        // dz: get 500, 404 json if errors
         $users = $this
             ->getDoctrine()
@@ -49,13 +59,12 @@ class AuthorizationController extends Controller
 
 
     /**
-     * @Route("/api/humans", name="api_humans")
+     * @Route("/api/form_authentication", name="api_humans")
      *
      */
     public function humansAction(Request $request)
     {
-        header("Access-Control-Allow-Origin: *");
-        header('Access-Control-Allow-Headers: Content-Type, *');
+
 
         $data = json_decode($request->getContent(), true);
 
@@ -73,8 +82,8 @@ class AuthorizationController extends Controller
             }
 
         if (!$i){
-                return new JsonResponse($data);
-//            return new Response("Validation error", 400);
+
+            return new Response("Validation error", 400);
         }
 
         $users = $this
@@ -92,5 +101,78 @@ class AuthorizationController extends Controller
             200,
             array('content-type' => 'text/html'));
     }
+
+
+    /**
+     * @Route ("/api/registration", name="api_registration")
+     */
+    public function registrationAction (Request $request, ObjectManager $manager){
+        $data = json_decode($request->getContent(), true);
+
+//        return new JsonResponse($data);
+
+        if (!$data['email'] && !$data['password']){
+            return new Response("",400);
+
+
+        }
+
+        $users = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->getByEmail($data['email']);
+
+        if ($users) {
+            return new Response("",405 );
+        }
+
+        $user = new User();
+
+        $encoder = $this->container->get('security.password_encoder');
+        $passwordEncoded = $encoder->encodePassword($user, $data['password']);
+
+        $user->setEmail($data['email']);
+        $user->setPassword($passwordEncoded);
+
+    $manager->persist($user);
+    $manager->flush();
+
+
+        return new Response("User was created",201);
+
+    }
+
+    /**
+     * @Route ("/api/login", name="api_login")
+     */
+    public function loginAction (Request $request, ObjectManager $manager){
+        $data = json_decode($request->getContent(), true);
+
+        if (!$data['email'] && !$data['password']){
+            return new Response("",400);
+        }
+
+        $user = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->getByEmail($data['email']);
+
+        if (!$user) {
+            return new Response("",404);
+        }
+
+
+        $encoder = $this->container->get('security.password_encoder');
+        $passwordEncoded = $encoder->encodePassword($user, $data['password']);
+
+        if ($passwordEncoded == $user['password']){
+
+            return JsonResponse::create($user['roles'], 200);
+        }
+
+        return new Response("",400);
+
+    }
+
 
 }
