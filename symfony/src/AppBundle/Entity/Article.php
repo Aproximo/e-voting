@@ -39,7 +39,7 @@ class Article
     /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
-     *@JoinColumn(name="categoryId")
+     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
      */
     private $category;
 
