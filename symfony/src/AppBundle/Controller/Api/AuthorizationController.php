@@ -12,11 +12,13 @@ namespace AppBundle\Controller\Api;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
+
 
 
 class AuthorizationController extends Controller
@@ -107,6 +109,8 @@ class AuthorizationController extends Controller
     public function registrationAction (Request $request, ObjectManager $manager){
         $data = json_decode($request->getContent(), true);
 
+//        return new JsonResponse($data);
+
         if (!$data['email'] && !$data['password']){
             return new Response("",400);
 
@@ -130,8 +134,9 @@ class AuthorizationController extends Controller
         $user->setEmail($data['email']);
         $user->setPassword($passwordEncoded);
 
-        $manager->persist($user);
-        $manager->flush();
+    $manager->persist($user);
+    $manager->flush();
+
 
         return new Response("User was created",201);
 
