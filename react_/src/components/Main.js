@@ -11,9 +11,10 @@ import CandidatRoutes from "../containers/Candidates/Routes";
 import Personal from '../containers/Personal/Personal';
 import Articlе from '../containers/Articles/Article';
 import Candidat from "../containers/Candidates/Candidat";
-import Form from '../containers/Form/Form';
+import Form from '../containers/Login/Form';
 import Admin from '../components/Admin';
 import '../style/components/Main.css';
+import NotFound from '../components/NotFound';
 import PrivateRoute from "../containers/Login/Registration";
 
 
@@ -28,11 +29,12 @@ class Main extends React.Component {
                     <Route path='/registration' component={Registration}/>
                     <Route path='/articles' component={ArticleRoutes}/>
                     <Route path='/article/:id' component={Articlе}/>
-                    <Route path='/voting' component={Voting}/>
+                    <PrivateRoute path='/voting' component={Voting}/>
                     <Route path='/admin' component={Admin}/>
                     <PrivateRoute path='/personal' component={Personal}/>
                     <Route path='/presidential-elections' component={CandidatRoutes}/>
                     <Route path='/candidate/:id' component={Candidat}/>
+                    <Route path='*' component={NotFound}/>
                 </Switch>
             </main>
         )
