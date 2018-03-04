@@ -68,18 +68,23 @@ class Candidat extends Component {
     }
 
     render() {
-        console.log(this.state);
-        return (
-            <div>
+        // console.log(this.state);
+        if(!this.state.candidat) {
+            return (
+            <span>Candidat</span>
+            )
+        } else {
+            return (
+                <div>
                     <p>{this.state.candidat.name}</p><br/>
-                <button onClick={this.handleSubmitChoice}>Проголосовать</button>
+                    <button onClick={this.handleSubmitChoice}>Проголосовать</button>
                     <img src={this.state.candidat.photo} alt="xxx"/><br/>
                     <p>{this.state.candidat.consigment}</p><br/>
                     <p>{this.state.candidat.electioneering}</p><br/>
+                </div>
+            )
+        }
 
-                <span>Candidat</span>
-            </div>
-        )
     }
 }
 

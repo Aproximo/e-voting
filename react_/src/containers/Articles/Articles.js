@@ -13,9 +13,6 @@ class Articles extends Component {
         this.toDo = this.toDo.bind(this);
     }
 
-
-
-
     componentWillMount() {
         axios.get('http://127.0.0.1:8000/api/article')
             .then(({ data }) => {
@@ -31,36 +28,37 @@ class Articles extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-
     }
+
     toDo(){
         let $item = this.state.article.map((item, key) => {
             return (
-                        <li id={key}>
-
-                            <Link to={`/articles/${item.id}`}>{item.title}</Link>
-                        </li>
-
-
+                <div>
+                    <Link to={`/article/${item.id}`}>{item.title}</Link>
+                </div>
             )
         });
-        // console.log("toDo", $item);
         this.setState({
             item: $item
         })
     }
 
-
     render() {
         let item = this.state.item;
-        return (
-            <div>
-                <ul>
-                    {item}
-                </ul>
+        if(!item) {
+            return (
                 <span>Articles</span>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <ul>
+                    {item}.forEach(function(item) {
+                    <li key={item.id}>item</li>
+                    })
+                </ul>
+            )
+        }
+
     }
 }
 

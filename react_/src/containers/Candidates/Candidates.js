@@ -7,9 +7,7 @@ class Candidates extends Component {
         super(props);
         this.state = {
             candidats: {title : "loading"},
-
         };
-
         this.componentWillMount = this.componentWillMount.bind(this);
         this.toDo = this.toDo.bind(this);
     }
@@ -36,7 +34,6 @@ class Candidates extends Component {
             return (
                 <li id={key}>
                     <Link to={`/candidate/${item.id}`}>{item.name}</Link>
-
                 </li>
             )
         });
@@ -47,16 +44,21 @@ class Candidates extends Component {
     }
 
     render() {
-        console.log(this.props)
+        console.log(this.props);
         let item = this.state.item;
-        return (
-            <div>
-                <ul>
-                    {item}
-                </ul>
+        if(!item) {
+            return (
                 <span>Candidates</span>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div>
+                    <ul>
+                        {item}
+                    </ul>
+                </div>
+            )
+        }
     }
 
 };

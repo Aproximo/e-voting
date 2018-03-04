@@ -1,12 +1,10 @@
-
 import React from "react";
 import {
-    BrowserRouter as Router,
     Route,
-    Link,
     Redirect,
-    withRouter
 } from "react-router-dom";
+import Registration from "./Registration";
+import Form from "./Form";
 
 
 export const fakeAuth = {
@@ -21,41 +19,23 @@ export const fakeAuth = {
     }
 };
 
-export const AuthButton = withRouter(
-    ({ history }) =>
-        fakeAuth.isAuthenticated ? (
-            <p>
-                Welcome!{" "}
-                <button
-                    onClick={() => {
-                        fakeAuth.signout(() => history.push("/"));
-                    }}
-                >
-                    Sign out
-                </button>
-            </p>
-        ) : (
-            <p>You are not logged in.</p>
-        )
-);
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={props =>
-            fakeAuth.isAuthenticated ? (
-                <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: "/login",
-                        state: { from: props.location }
-                    }}
-                />
-            )
-        }
-    />
-);
+// export const AuthButton = withRouter(
+//     ({ history }) =>
+//         fakeAuth.isAuthenticated ? (
+//             <p>
+//                 Welcome!{" "}
+//                 <button
+//                     onClick={() => {
+//                         fakeAuth.signout(() => history.push("/"));
+//                     }}
+//                 >
+//                     Sign out
+//                 </button>
+//             </p>
+//         ) : (
+//             <p>You are not logged in.</p>
+//         )
+// );
 
 class Login extends React.Component {
     state = {
@@ -86,3 +66,23 @@ class Login extends React.Component {
 }
 
 export default Login;
+
+export const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            fakeAuth.isAuthenticated ? (
+                <Component {...props} />
+            ) : (
+                <Redirect
+                    to={{
+                        pathname: "/login",
+                        state: { from: props.location }
+                    }}
+                />
+            )
+        }
+    />
+);
+
+c

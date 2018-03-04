@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import '../../style/containers/Form.css';
 import axios from 'axios'
-import Articles from "../Articles/Articles";
+import {Redirect} from "react-router-dom";
 
 
     class Form extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            passport_id: '',
-            name: '',
+            passport_id: '9999999999',
+            name: 'Jon',
             surname: '',
-            itn: '',
-            passport_pin: '',
-            date_of_birthday: '',
-            valid_until: '',
+            itn: '123456789',
+            passport_pin: 'Doe',
+            date_of_birthday: '2018-02-14',
+            valid_until: '2018-02-14',
+            modalOpen: false,
             status: ''
         };
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -27,8 +27,7 @@ import Articles from "../Articles/Articles";
         this.handleValidChange = this.handleValidChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
-
-
+        this.authenticAlert = this.authenticAlert.bind(this);
     }
 
     handlePassIdChange(e) {
@@ -77,7 +76,8 @@ import Articles from "../Articles/Articles";
             this.setState({
                 status: 200
             })
-        }
+    }
+
 
     handleSubmit(e) {
        e.preventDefault();
@@ -93,7 +93,7 @@ import Articles from "../Articles/Articles";
 
         array = JSON.stringify(array);
 
-        axios.post('http://127.0.0.1:8000/api/humans', array )
+        axios.post('http://127.0.0.1:8000/api/form_authentication', array )
         .then((response) => {
             if(response.status === 200) {
                 this.handleChangeStatus() ;
@@ -104,15 +104,13 @@ import Articles from "../Articles/Articles";
         });
     }
 
+    authenticAlert = () => {
+        alert('Вы успешно зарегестрированы');
+    };
+
     render() {
         console.log(this.state);
-        if (this.state.status === 200){
-                console.log(this.state.status)
-            return (
-                <Articles/>
-            );
-        }else{
-            console.log(this.state.status)
+        if (this.state.status !== 200){
             return (
                 <form onSubmit={this.handleSubmit} className="form-field">
                     <div className="form">
@@ -158,7 +156,25 @@ import Articles from "../Articles/Articles";
                     </div>
                 </form>
             );
-    }}
+        } else {
+            console.log(this.state.status);
+            if (this.state.status === 200) {
+                {this.authenticAlert()};
+                return (
+                    <div>
+                        <Redirect to="/" push/>
+                    </div>
+                )
+            }
+            else {
+                console.log (
+                    <div>Sorry try change your data in authentic form</div>
+                )
+
+            }
+
+        }
+    }
 
 }
 

@@ -27,15 +27,21 @@ class Article extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <ul>
-                    <li>{this.state.article.title}</li>
-                    <li>{this.state.article.content}</li>
-                </ul>
+        if(!this.state.article) {
+            return (
                 <span>Article</span>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div>
+                    <ul>
+                        <li>{this.state.article.title}</li>
+                        <li>{this.state.article.content}</li>
+                    </ul>
+                </div>
+            )
+        }
+
     }
 }
 
