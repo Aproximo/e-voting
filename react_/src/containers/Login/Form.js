@@ -8,13 +8,13 @@ import {Redirect} from "react-router-dom";
     constructor(props) {
         super(props);
         this.state = {
-            passport_id: '',
-            name: '',
+            passport_id: '9999999999',
+            name: 'Jon',
             surname: '',
-            itn: '',
-            passport_pin: '',
+            itn: '123456789',
+            passport_pin: 'Doe',
             date_of_birthday: '2018-02-14',
-            valid_until: '',
+            valid_until: '2018-02-14',
             modalOpen: false,
             status: ''
         };
@@ -93,7 +93,7 @@ import {Redirect} from "react-router-dom";
 
         array = JSON.stringify(array);
 
-        axios.post('http://127.0.0.1:8000/api/humans', array )
+        axios.post('http://127.0.0.1:8000/api/form_authentication', array )
         .then((response) => {
             if(response.status === 200) {
                 this.handleChangeStatus() ;
