@@ -159,7 +159,7 @@ import {Redirect} from "react-router-dom";
         } else {
             console.log(this.state.status);
             if (this.state.status === 200) {
-                {this.authenticAlert()};
+                {this.authenticAlert()}
                 return (
                     <div>
                         <Redirect to="/" push/>

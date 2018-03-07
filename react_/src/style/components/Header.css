@@ -24,10 +24,19 @@
 .main-nav-order {
     display: inline;
     list-style-type: none;
-    margin: 2% 0 2% 0;
+    margin: 2% 1% 2% 1%;
     text-decoration: none;
     color: #000000;
     font-size: 20px;
+}
+
+.main-nav-order-right {
+    display: inline;
+    list-style-type: none;
+    margin: 2% 1% 2% 1%;
+    text-decoration: none;
+    color: #3f88a7;
+    font-size: 25px;
 }
 
 .main-nav-order:hover {

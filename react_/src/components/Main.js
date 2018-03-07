@@ -16,6 +16,8 @@ import Admin from '../components/Admin';
 import '../style/components/Main.css';
 import NotFound from '../components/NotFound';
 import PrivateRoute from "../containers/Login/Registration";
+import LoginPage from "../containers/Client/LoginPage";
+import SignUpPage from "../containers/Client/SignUpPage";
 
 
 class Main extends React.Component {
@@ -24,6 +26,8 @@ class Main extends React.Component {
         return (
             <main className='main-div'>
                 <Switch>
+                    <Route path='/login' component={LoginPage}/>
+                    <Route path='/signup' component={SignUpPage}/>
                     <Route exact path='/' component={Home}/>
                     <Route path='/form' component={Form}/>
                     <Route path='/registration' component={Registration}/>
