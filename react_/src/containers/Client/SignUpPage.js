@@ -3,6 +3,7 @@
  */
 
 import React, {Component} from 'react';
+import axios from "axios/index";
 import SignUpForm from '../Client/SignUpForm';
 
 
@@ -20,12 +21,16 @@ class SignUpPage extends Component {
             user: {
                 email: '',
                 name: '',
-                password: ''
+                password: '',
+                isAuthenticated: false
             }
         };
 
-        this.processForm = this.processForm.bind(this);
+        this.handleSubmitRegistration = this.handleSubmitRegistration.bind(this);
         this.changeUser = this.changeUser.bind(this);
+        this.authenticate = this.authenticate.bind(this);
+        this.handleChangeRegistrationStatus = this.handleChangeRegistrationStatus.bind(this);
+        this.registrationAlert = this.registrationAlert.bind(this);
     }
 
     /**
@@ -43,24 +48,72 @@ class SignUpPage extends Component {
         });
     }
 
+    authenticate = (e) => {
+        this.setState({isAuthenticated: true});
+    };
+
+    handleChangeRegistrationStatus(e) {
+        this.setState({
+            status: 200
+        })
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem('name', this.state.name)
+    }
+
+    registrationAlert = () => {
+        alert('Вы успешно зарегестрированы');
+    };
+
     /**
      * Process the form.
      *
      * @param {object} event - the JavaScript event object
      */
-    processForm(event) {
+    handleSubmitRegistration(e) {
         // prevent default action. in this case, action is the form submission event
-        event.preventDefault();
+        e.preventDefault();
 
-        console.log('name:', this.state.user.name);
-        console.log('email:', this.state.user.email);
-        console.log('password:', this.state.user.password);
+        // console.log('name:', this.state.user.name);
+        // console.log('email:', this.state.user.email);
+        // console.log('password:', this.state.user.password);
+
+
+        let registration_array = {
+            name: this.state.user.name,
+            email: this.state.user.email,
+            password: this.state.user.password,
+        };
+        this.setState({
+            name: this.state.user.name,
+            email: this.state.user.email,
+            password: this.state.user.password
+        });
+
+        this.authenticate();
+
+
+        registration_array = JSON.stringify(registration_array);
+        axios.post('http://127.0.0.1:8000/api/registration', registration_array)
+
+            .then((response) => {
+                if (response.status === 201) {
+                    this.handleChangeRegistrationStatus();
+
+                    console.log('response', response);
+                }
+                console.log('response', response);
+            })
+            .catch(function (error) {
+                console.log("error", error);
+            });
     }
 
     render() {
         return (
             <SignUpForm
-                onSubmit={this.processForm}
+                onSubmit={this.handleSubmitRegistration}
                 onChange={this.changeUser}
                 errors={this.state.errors}
                 user={this.state.user}
