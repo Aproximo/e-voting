@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {
-    Route,
-    Redirect,
-    withRouter
+    Redirect
 } from "react-router-dom";
 import {FormErrors} from './FormErrors';
-import Modalc from "../Trash/Modal";
 import axios from "axios/index";
 
 class Registration extends Component {
@@ -184,7 +181,7 @@ class Registration extends Component {
         } else {
             console.log(this.state.status);
             if (this.state.status === 200) {
-                {this.registrationAlert()};
+                {this.registrationAlert()}
                 return (
                     <div>
                         <Redirect to="/form" push/>
